@@ -3,30 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Portfolio</title>
+    <title>My Professional Site</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <nav>
+        <button id="theme-toggle">Toggle Dark Mode</button>
+    </nav>
+
     <header>
-        <h1>Welcome to My Website</h1>
-        <p>Built with GitHub OBV</p>
+        <h1>My Digital Space</h1>
+        <p>Created with GitHub Pages.and Ducks Ofc</p>
     </header>
 
-    <section class="container">
-        <h2>About Me</h2>
-        <p>I Like Ducks. Love Animals and I want to have fun making a website.</p>
-        
-        <div class="card">
-            <h3>My Projects</h3>
-            <ul>
-                <li>Project 1: GitHub Hosting</li>
-                <li>Project 2: Coming Soon...</li>
-            </ul>
-        </div>
-    </section>
+    <main class="container">
+        <section>
+            <h2>About Me</h2>
+            <p>I Like Ducks. And I want to have fun making a website!</p>
+        </section>
+
+        <section class="card">
+            <h2>Contact Me</h2>
+            <p>Feel free to reach out via email or follow my progress on GitHub.</p>
+            <a href="mailto:your-ahgutridge@students.wcpss.net" class="btn">Send an Email</a>
+        </section>
+    </main>
 
     <footer>
-        <p>© 2026 | Created with :Ducks:</p>
+        <p>© 2026 | DucksShallRule</p>
     </footer>
+
+    <script>
+        const btn = document.getElementById('theme-toggle');
+        btn.addEventListener('click', () => {
+            document.body.classList.toggle('dark-theme');
+        });
+    </script>
 </body>
 </html>
