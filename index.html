@@ -3,225 +3,221 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DucksWeb |</title>
+    <title>DucksWeb</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root {
-            --bg-color: #1a1a1a;
-            --container-bg: #252525;
-            --card-bg: #2d2d2d;
-            --text-main: white;
-            --text-sub: #888;
+            --bg-dark: #0d1117;
+            --sidebar-bg: #161b22;
+            --card-bg: #21262d;
             --accent: #55FF55; 
-            --secondary-accent: #ffcc00; 
-            --border: #444;
+            --blue-accent: #58a6ff;
+            --gold: #ffcc00;
+            --text-main: #c9d1d9;
+            --border: #30363d;
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--bg-color);
+            font-family: 'Inter', 'Segoe UI', sans-serif;
+            background-color: var(--bg-dark);
             color: var(--text-main);
-            text-align: center;
-            padding: 40px 20px;
-        }
-
-        .container { max-width: 850px; margin: auto; position: relative; }
-
-        /* Live Clock & Deployment Info */
-        .system-time {
-            position: absolute;
-            top: -20px;
-            right: 0;
-            text-align: right;
-            font-family: 'Courier New', Courier, monospace;
-            font-size: 0.8rem;
-            color: var(--accent);
-        }
-
-        h1 { color: var(--accent); font-size: 3.5rem; margin-bottom: 10px; text-shadow: 3px 3px #000; }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 15px;
-            margin-bottom: 30px;
-        }
-
-        .stat-card {
-            background: var(--container-bg);
-            padding: 15px;
-            border-radius: 12px;
-            border: 1px solid var(--border);
-            border-top: 3px solid var(--accent);
-        }
-
-        .stat-card span { display: block; font-size: 0.7rem; color: var(--text-sub); text-transform: uppercase; }
-        .stat-card b { font-size: 1.1rem; color: var(--text-main); }
-
-        /* Live Changelog */
-        .changelog {
-            background: var(--card-bg);
-            border-radius: 15px;
-            padding: 25px;
-            text-align: left;
-            border: 1px solid var(--border);
-            margin-bottom: 30px;
-        }
-
-        .changelog h3 { margin-top: 0; color: var(--secondary-accent); display: flex; align-items: center; gap: 10px; }
-        
-        .log-item {
-            padding: 12px 0;
-            border-bottom: 1px solid #3d3d3d;
+            margin: 0;
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .log-item:last-child { border-bottom: none; }
-
-        .version-tag { 
-            background: var(--accent); 
-            color: #000; 
-            padding: 2px 8px; 
-            border-radius: 5px; 
-            font-size: 0.75rem; 
-            font-weight: bold;
-        }
-
-        .log-content { flex-grow: 1; margin-left: 15px; font-size: 0.95rem; }
-        .log-time { color: var(--accent); font-size: 0.8rem; font-family: monospace; font-weight: bold; }
-
-        /* Game Area */
-        .game-container {
-            background: var(--container-bg);
-            border-radius: 15px;
-            padding: 20px;
-            border: 2px solid var(--accent);
-            margin-bottom: 30px;
-            position: relative;
-            height: 250px;
+            height: 100vh;
             overflow: hidden;
         }
 
-        .duck-target {
-            font-size: 3.5rem;
-            cursor: pointer;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            user-select: none;
-            transition: 0.1s;
-        }
-
-        .dog-shoutout {
-            background: #1e2530;
+        /* Sidebar Navigation */
+        nav {
+            width: 240px;
+            background: var(--sidebar-bg);
+            border-right: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
             padding: 20px;
-            border-radius: 15px;
-            margin-bottom: 30px;
-            border-left: 5px solid #58a6ff; 
-            text-align: left;
         }
 
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
-        .card { background: var(--container-bg); padding: 20px; border-radius: 15px; border: 1px solid var(--border); text-decoration: none; color: var(--text-main); transition: 0.3s; }
-        .card:hover { border-color: var(--accent); transform: translateY(-5px); }
+        .nav-logo { font-weight: bold; color: var(--accent); font-size: 1.5rem; margin-bottom: 30px; display: flex; align-items: center; gap: 10px; }
+        .nav-link { color: var(--text-main); text-decoration: none; padding: 12px; border-radius: 8px; margin-bottom: 5px; transition: 0.2s; display: flex; align-items: center; gap: 10px; }
+        .nav-link:hover { background: var(--card-bg); color: var(--accent); }
+        .nav-link.active { background: rgba(85, 255, 85, 0.1); color: var(--accent); border: 1px solid rgba(85, 255, 85, 0.2); }
+
+        /* Main Content Area */
+        main {
+            flex-grow: 1;
+            padding: 30px;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .top-stats { display: flex; gap: 20px; }
+        .stat-badge { background: var(--card-bg); border: 1px solid var(--border); padding: 5px 15px; border-radius: 20px; font-size: 0.8rem; font-family: monospace; }
+        .stat-badge b { color: var(--accent); }
+
+        /* Dashboard Grid */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 20px;
+        }
+
+        .panel {
+            background: var(--sidebar-bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+        }
+
+        .panel-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; border-bottom: 1px solid var(--border); padding-bottom: 10px; }
+        .panel-header h3 { margin: 0; font-size: 1rem; color: var(--accent); text-transform: uppercase; letter-spacing: 1px; }
+
+        /* Game Area */
+        #gameArea { height: 300px; position: relative; overflow: hidden; background: #000; border-radius: 8px; }
+        .duck-target { font-size: 3rem; cursor: pointer; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); transition: 0.05s; z-index: 10; user-select: none; }
+
+        /* Terminal Console */
+        .console {
+            background: #000;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.85rem;
+            padding: 15px;
+            height: 200px;
+            overflow-y: auto;
+            border-radius: 8px;
+            color: #888;
+        }
+        .console .cmd { color: var(--accent); }
+        .console .info { color: var(--blue-accent); }
+
+        /* Projects List */
+        .project-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+            border-radius: 6px;
+            text-decoration: none;
+            color: inherit;
+            margin-bottom: 8px;
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+        }
+        .project-item:hover { border-color: var(--accent); }
+
+        .dog-card { border-left: 4px solid var(--blue-accent); }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <div class="system-time">
-            SYSTEM_TIME: <span id="liveClock">00:00:00</span><br>
-            LAST_DEPLOY: 11:04 AM
-        </div>
-
-        <h1>LuckyDuck</h1>
-        
-        <div class="stats-grid">
-            <div class="stat-card"><span>Status</span><b>ACTIVE</b></div>
-            <div class="stat-card"><span>Region</span><b>US-EAST</b></div>
-            <div class="stat-card"><span>Env</span><b>PROD</b></div>
-            <div class="stat-card"><span>Version</span><b>2.7.1</b></div>
-        </div>
-
-        <div class="changelog">
-            <h3><i class="fas fa-history"></i> Live Update Log</h3>
-            
-            <div class="log-item">
-                <span class="version-tag">v2.7.1</span>
-                <span class="log-content">Added Live System Clock and Deployment timestamps.</span>
-                <span class="log-time">1m ago</span>
-            </div>
-
-            <div class="log-item">
-                <span class="version-tag">v2.6.5</span>
-                <span class="log-content">Optimized aim-trainer duck pathing and logic.</span>
-                <span class="log-time">22m ago</span>
-            </div>
-
-            <div class="log-item">
-                <span class="version-tag">v2.6.0</span>
-                <span class="log-content">Switched Changelog to relative time format.</span>
-                <span class="log-time">1h ago</span>
-            </div>
-
-            <div class="log-item">
-                <span class="version-tag">v2.5.5</span>
-                <span class="log-content">Reconfigured Stats Dashboard and layout cleanup.</span>
-                <span class="log-time">3h ago</span>
+    <nav>
+        <div class="nav-logo">🦆 LuckyDuck</div>
+        <a href="#" class="nav-link active"><i class="fas fa-th-large"></i> Dashboard</a>
+        <a href="https://luckyduck883.github.io/ImaSayDucks/" class="nav-link"><i class="fas fa-feather"></i> ImaSayDucks</a>
+        <a href="https://luckyduck883.github.io/Cha0sCraft/" class="nav-link"><i class="fas fa-swords"></i> Cha0sCraft</a>
+        <a href="https://github.com/luckyduck883" class="nav-link"><i class="fab fa-github"></i> GitHub</a>
+        <div style="margin-top: auto;">
+            <div class="nav-link" style="font-size: 0.8rem; color: var(--text-sub);">
+                <i class="fas fa-clock"></i> <span id="liveClock">00:00:00</span>
             </div>
         </div>
+    </nav>
 
-        <div class="game-container" id="gameArea">
-            <div style="display: flex; justify-content: space-around; font-weight: bold; color: var(--secondary-accent); font-family: monospace;">
-                <span>CLICKS: <span id="score">0</span></span>
-                <span>BEST: 1000</span>
+    <main>
+        <header>
+            <h2 style="margin:0;">Developer Overview</h2>
+            <div class="top-stats">
+                <div class="stat-badge">STATUS: <b>READY</b></div>
+                <div class="stat-badge">VERSION: <b>3.0.0</b></div>
+                <div class="stat-badge">PING: <b>14ms</b></div>
             </div>
-            <div class="duck-target" id="duck" onclick="moveDuck()">🦆</div>
-        </div>
+        </header>
 
-        <div class="dog-shoutout">
-            <h3 style="margin:0; color: #58a6ff;"><i class="fas fa-dog"></i> Luna & Ryder</h3>
-            <p>Site optimization assisted by the world's best dogs.</p>
-        </div>
+        <div class="dashboard-grid">
+            <div class="left-col">
+                <div class="panel" style="margin-bottom: 20px;">
+                    <div class="panel-header">
+                        <h3><i class="fas fa-crosshairs"></i> Aim Trainer (v3)</h3>
+                        <span style="font-family: monospace;">CLICKS: <b id="score" style="color: var(--gold);">0</b></span>
+                    </div>
+                    <div id="gameArea">
+                        <div class="duck-target" id="duck" onclick="moveDuck()">🦆</div>
+                    </div>
+                </div>
 
-        <h2 style="color: var(--accent); text-align: left;">Projects</h2>
-        <div class="grid">
-            <a href="https://luckyduck883.github.io/ImaSayDucks/" class="card"><h3>🦆 ImaSayDucks</h3></a>
-            <a href="https://luckyduck883.github.io/Cha0sCraft/" class="card"><h3>⚔️ Cha0sCraft</h3></a>
-            <a href="https://luckyduck883.github.io/BioRoll/" class="card"><h3>🎲 BioRoll</h3></a>
-        </div>
+                <div class="panel">
+                    <div class="panel-header"><h3><i class="fas fa-terminal"></i> System Console</h3></div>
+                    <div class="console" id="console">
+                        <div>[SYSTEM] Initializing DucksWeb Kernel...</div>
+                        <div>[SYSTEM] Luna & Ryder modules loaded.</div>
+                        <div class="info">[INFO] Chilling mode active.</div>
+                    </div>
+                </div>
+            </div>
 
-        <div style="margin-top: 50px;">
-            <a href="https://github.com/luckyduck883" style="color: var(--text-sub); margin: 0 20px; font-size: 2rem;"><i class="fab fa-github"></i></a>
-            <a href="https://scratch.mit.edu/users/DANUGGET21/" style="color: var(--text-sub); margin: 0 20px; font-size: 2rem;"><i class="fas fa-cat"></i></a>
+            <div class="right-col">
+                <div class="panel dog-card" style="margin-bottom: 20px;">
+                    <div class="panel-header"><h3><i class="fas fa-dog"></i> Companions</h3></div>
+                    <p style="font-size: 0.9rem;"><b>Luna & Ryder</b> are currently monitoring development.</p>
+                    <button onclick="logAction('Treat dispensed to Luna & Ryder.')" style="width:100%; padding: 8px; background: var(--blue-accent); border: none; border-radius: 5px; cursor: pointer; color: white; font-weight: bold;">GIVE TREAT</button>
+                </div>
+
+                <div class="panel">
+                    <div class="panel-header"><h3><i class="fas fa-code-branch"></i> Projects</h3></div>
+                    <a href="https://luckyduck883.github.io/ImaSayDucks/" class="project-item"><span>ImaSayDucks</span> <i class="fas fa-external-link-alt"></i></a>
+                    <a href="https://luckyduck883.github.io/Cha0sCraft/" class="project-item"><span>Cha0sCraft</span> <i class="fas fa-external-link-alt"></i></a>
+                    <a href="https://luckyduck883.github.io/BioRoll/" class="project-item"><span>BioRoll</span> <i class="fas fa-external-link-alt"></i></a>
+                </div>
+
+                <div class="panel" style="margin-top: 20px; font-size: 0.8rem;">
+                    <div class="panel-header"><h3>Changelog</h3></div>
+                    <div style="color: var(--accent); margin-bottom: 5px;">v3.0.0 (3m ago)</div>
+                    <div style="color: var(--text-sub);">UI Overhaul to Dashboard style.</div>
+                    <hr style="border: 0; border-top: 1px solid var(--border); margin: 10px 0;">
+                    <div style="color: var(--accent); margin-bottom: 5px;">v2.7.0 (1h ago)</div>
+                    <div style="color: var(--text-sub);">Integrated system clock.</div>
+                </div>
+            </div>
         </div>
-    </div>
+    </main>
 
     <script>
-        // Live Clock Script
-        function updateClock() {
-            const now = new Date();
-            const timeString = now.toLocaleTimeString([], { hour12: true, hour: '2-digit', minute: '2-digit', second: '2-digit' });
-            document.getElementById('liveClock').innerText = timeString;
-        }
-        setInterval(updateClock, 1000);
-        updateClock();
-
-        // Duck Clicker Script
         let clicks = 0;
+
+        function logAction(msg) {
+            const consoleBox = document.getElementById('console');
+            const time = new Date().toLocaleTimeString([], { hour12: false });
+            const entry = document.createElement('div');
+            entry.innerHTML = `<span class="cmd">[${time}]</span> ${msg}`;
+            consoleBox.appendChild(entry);
+            consoleBox.scrollTop = consoleBox.scrollHeight;
+        }
+
         function moveDuck() {
             clicks++;
             document.getElementById('score').innerText = clicks;
+            logAction(`Duck target hit! Total: ${clicks}`);
+            
             const duck = document.getElementById('duck');
             const area = document.getElementById('gameArea');
             const maxX = area.clientWidth - 80;
             const maxY = area.clientHeight - 80;
+            
             duck.style.left = (Math.random() * maxX + 10) + 'px';
             duck.style.top = (Math.random() * maxY + 30) + 'px';
             duck.style.transform = 'none';
         }
+
+        function updateClock() {
+            document.getElementById('liveClock').innerText = new Date().toLocaleTimeString();
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
     </script>
 </body>
 </html>
