@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DucksWeb</title>
+    <title>DucksWeb |</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root {
@@ -25,11 +25,21 @@
             padding: 40px 20px;
         }
 
-        .container { max-width: 850px; margin: auto; }
+        .container { max-width: 850px; margin: auto; position: relative; }
+
+        /* Live Clock & Deployment Info */
+        .system-time {
+            position: absolute;
+            top: -20px;
+            right: 0;
+            text-align: right;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.8rem;
+            color: var(--accent);
+        }
 
         h1 { color: var(--accent); font-size: 3.5rem; margin-bottom: 10px; text-shadow: 3px 3px #000; }
 
-        /* Stats Dashboard */
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
@@ -45,7 +55,7 @@
             border-top: 3px solid var(--accent);
         }
 
-        .stat-card span { display: block; font-size: 0.8rem; color: var(--text-sub); text-transform: uppercase; }
+        .stat-card span { display: block; font-size: 0.7rem; color: var(--text-sub); text-transform: uppercase; }
         .stat-card b { font-size: 1.1rem; color: var(--text-main); }
 
         /* Live Changelog */
@@ -121,40 +131,45 @@
 <body>
 
     <div class="container">
+        <div class="system-time">
+            SYSTEM_TIME: <span id="liveClock">00:00:00</span><br>
+            LAST_DEPLOY: 11:04 AM
+        </div>
+
         <h1>LuckyDuck</h1>
         
         <div class="stats-grid">
-            <div class="stat-card"><span>Status</span><b>LIVE</b></div>
-            <div class="stat-card"><span>Uptime</span><b>99.9%</b></div>
-            <div class="stat-card"><span>Environment</span><b>Production</b></div>
-            <div class="stat-card"><span>Version</span><b>2.6.2</b></div>
+            <div class="stat-card"><span>Status</span><b>ACTIVE</b></div>
+            <div class="stat-card"><span>Region</span><b>US-EAST</b></div>
+            <div class="stat-card"><span>Env</span><b>PROD</b></div>
+            <div class="stat-card"><span>Version</span><b>2.7.1</b></div>
         </div>
 
         <div class="changelog">
             <h3><i class="fas fa-history"></i> Live Update Log</h3>
             
             <div class="log-item">
-                <span class="version-tag">v2.6.2</span>
+                <span class="version-tag">v2.7.1</span>
+                <span class="log-content">Added Live System Clock and Deployment timestamps.</span>
+                <span class="log-time">1m ago</span>
+            </div>
+
+            <div class="log-item">
+                <span class="version-tag">v2.6.5</span>
                 <span class="log-content">Optimized aim-trainer duck pathing and logic.</span>
-                <span class="log-time">4m ago</span>
+                <span class="log-time">22m ago</span>
             </div>
 
             <div class="log-item">
                 <span class="version-tag">v2.6.0</span>
                 <span class="log-content">Switched Changelog to relative time format.</span>
-                <span class="log-time">18m ago</span>
+                <span class="log-time">1h ago</span>
             </div>
 
             <div class="log-item">
                 <span class="version-tag">v2.5.5</span>
                 <span class="log-content">Reconfigured Stats Dashboard and layout cleanup.</span>
-                <span class="log-time">2h ago</span>
-            </div>
-
-            <div class="log-item">
-                <span class="version-tag">v2.4.1</span>
-                <span class="log-content">Updated Luna & Ryder profile settings.</span>
-                <span class="log-time">5h ago</span>
+                <span class="log-time">3h ago</span>
             </div>
         </div>
 
@@ -168,7 +183,7 @@
 
         <div class="dog-shoutout">
             <h3 style="margin:0; color: #58a6ff;"><i class="fas fa-dog"></i> Luna & Ryder</h3>
-            <p>The best dogs for a coder who just wants to chill.</p>
+            <p>Site optimization assisted by the world's best dogs.</p>
         </div>
 
         <h2 style="color: var(--accent); text-align: left;">Projects</h2>
@@ -185,6 +200,16 @@
     </div>
 
     <script>
+        // Live Clock Script
+        function updateClock() {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString([], { hour12: true, hour: '2-digit', minute: '2-digit', second: '2-digit' });
+            document.getElementById('liveClock').innerText = timeString;
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+
+        // Duck Clicker Script
         let clicks = 0;
         function moveDuck() {
             clicks++;
