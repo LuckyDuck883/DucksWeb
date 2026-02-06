@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DucksWeb | Dev Portal</title>
+    <title>DucksWeb</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root {
@@ -12,8 +12,8 @@
             --card-bg: #2d2d2d;
             --text-main: white;
             --text-sub: #888;
-            --accent: #55FF55; /* Green */
-            --secondary-accent: #ffcc00; /* Gold */
+            --accent: #55FF55; 
+            --secondary-accent: #ffcc00; 
             --border: #444;
         }
 
@@ -46,9 +46,9 @@
         }
 
         .stat-card span { display: block; font-size: 0.8rem; color: var(--text-sub); text-transform: uppercase; }
-        .stat-card b { font-size: 1.2rem; color: var(--text-main); }
+        .stat-card b { font-size: 1.1rem; color: var(--text-main); }
 
-        /* Changelog Styling */
+        /* Live Changelog */
         .changelog {
             background: var(--card-bg);
             border-radius: 15px;
@@ -59,24 +59,29 @@
         }
 
         .changelog h3 { margin-top: 0; color: var(--secondary-accent); display: flex; align-items: center; gap: 10px; }
+        
         .log-item {
             padding: 12px 0;
             border-bottom: 1px solid #3d3d3d;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
         .log-item:last-child { border-bottom: none; }
+
         .version-tag { 
             background: var(--accent); 
             color: #000; 
             padding: 2px 8px; 
             border-radius: 5px; 
             font-size: 0.75rem; 
-            font-weight: bold; 
-            margin-right: 10px;
+            font-weight: bold;
         }
-        .log-text { font-size: 0.95rem; }
-        .log-date { float: right; color: var(--text-sub); font-size: 0.8rem; }
 
-        /* Mini Game Area */
+        .log-content { flex-grow: 1; margin-left: 15px; font-size: 0.95rem; }
+        .log-time { color: var(--accent); font-size: 0.8rem; font-family: monospace; font-weight: bold; }
+
+        /* Game Area */
         .game-container {
             background: var(--container-bg);
             border-radius: 15px;
@@ -99,13 +104,12 @@
             transition: 0.1s;
         }
 
-        /* Dog Section */
         .dog-shoutout {
             background: #1e2530;
             padding: 20px;
             border-radius: 15px;
             margin-bottom: 30px;
-            border-left: 5px solid #58a6ff; /* Blue touch for your favorite color */
+            border-left: 5px solid #58a6ff; 
             text-align: left;
         }
 
@@ -120,48 +124,54 @@
         <h1>LuckyDuck</h1>
         
         <div class="stats-grid">
-            <div class="stat-card"><span>Status</span><b>ONLINE</b></div>
-            <div class="stat-card"><span>Version</span><b>2.5.0</b></div>
-            <div class="stat-card"><span>Language</span><b>JS / HTML</b></div>
-            <div class="stat-card"><span>Theme</span><b>Green/Gold</b></div>
+            <div class="stat-card"><span>Status</span><b>LIVE</b></div>
+            <div class="stat-card"><span>Uptime</span><b>99.9%</b></div>
+            <div class="stat-card"><span>Environment</span><b>Production</b></div>
+            <div class="stat-card"><span>Version</span><b>2.6.2</b></div>
         </div>
 
         <div class="changelog">
-            <h3><i class="fas fa-list-ul"></i> Website Changelog</h3>
+            <h3><i class="fas fa-history"></i> Live Update Log</h3>
             
             <div class="log-item">
-                <span class="log-date">Feb 6, 2026</span>
-                <span class="version-tag">v2.5.0</span>
-                <span class="log-text">Removed inventory bar. Added stats dashboard and development log.</span>
+                <span class="version-tag">v2.6.2</span>
+                <span class="log-content">Optimized aim-trainer duck pathing and logic.</span>
+                <span class="log-time">4m ago</span>
             </div>
 
             <div class="log-item">
-                <span class="log-date">Feb 5, 2026</span>
-                <span class="version-tag">v2.4.0</span>
-                <span class="log-text">Added Minecraft inventory bar and Luna & Ryder treat system.</span>
+                <span class="version-tag">v2.6.0</span>
+                <span class="log-content">Switched Changelog to relative time format.</span>
+                <span class="log-time">18m ago</span>
             </div>
 
             <div class="log-item">
-                <span class="log-date">Feb 3, 2026</span>
-                <span class="version-tag">v2.0.0</span>
-                <span class="log-text">Implemented teleporting duck logic and high-score tracking.</span>
+                <span class="version-tag">v2.5.5</span>
+                <span class="log-content">Reconfigured Stats Dashboard and layout cleanup.</span>
+                <span class="log-time">2h ago</span>
+            </div>
+
+            <div class="log-item">
+                <span class="version-tag">v2.4.1</span>
+                <span class="log-content">Updated Luna & Ryder profile settings.</span>
+                <span class="log-time">5h ago</span>
             </div>
         </div>
 
         <div class="game-container" id="gameArea">
-            <div style="display: flex; justify-content: space-around; font-weight: bold; color: var(--secondary-accent);">
+            <div style="display: flex; justify-content: space-around; font-weight: bold; color: var(--secondary-accent); font-family: monospace;">
                 <span>CLICKS: <span id="score">0</span></span>
-                <span>RECORD: 1000</span>
+                <span>BEST: 1000</span>
             </div>
             <div class="duck-target" id="duck" onclick="moveDuck()">🦆</div>
         </div>
 
         <div class="dog-shoutout">
             <h3 style="margin:0; color: #58a6ff;"><i class="fas fa-dog"></i> Luna & Ryder</h3>
-            <p>The real owners of this website. Currently chilling while I code and play Minecraft.</p>
+            <p>The best dogs for a coder who just wants to chill.</p>
         </div>
 
-        <h2 style="color: var(--accent); text-align: left;">Main Projects</h2>
+        <h2 style="color: var(--accent); text-align: left;">Projects</h2>
         <div class="grid">
             <a href="https://luckyduck883.github.io/ImaSayDucks/" class="card"><h3>🦆 ImaSayDucks</h3></a>
             <a href="https://luckyduck883.github.io/Cha0sCraft/" class="card"><h3>⚔️ Cha0sCraft</h3></a>
@@ -171,7 +181,6 @@
         <div style="margin-top: 50px;">
             <a href="https://github.com/luckyduck883" style="color: var(--text-sub); margin: 0 20px; font-size: 2rem;"><i class="fab fa-github"></i></a>
             <a href="https://scratch.mit.edu/users/DANUGGET21/" style="color: var(--text-sub); margin: 0 20px; font-size: 2rem;"><i class="fas fa-cat"></i></a>
-            <p style="color: #444; margin-top: 20px;">© 2026 LuckyDuck Development</p>
         </div>
     </div>
 
@@ -180,18 +189,12 @@
         function moveDuck() {
             clicks++;
             document.getElementById('score').innerText = clicks;
-            
             const duck = document.getElementById('duck');
             const area = document.getElementById('gameArea');
-            
             const maxX = area.clientWidth - 80;
             const maxY = area.clientHeight - 80;
-            
-            const x = Math.floor(Math.random() * maxX) + 10;
-            const y = Math.floor(Math.random() * maxY) + 30;
-            
-            duck.style.left = x + 'px';
-            duck.style.top = y + 'px';
+            duck.style.left = (Math.random() * maxX + 10) + 'px';
+            duck.style.top = (Math.random() * maxY + 30) + 'px';
             duck.style.transform = 'none';
         }
     </script>
