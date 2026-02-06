@@ -14,15 +14,15 @@
             padding: 50px 20px;
         }
         .container { max-width: 900px; margin: auto; }
-        h1 { color: #55FF55; margin-bottom: 10px; text-shadow: 2px 2px #000; } /* Minecraft Green */
+        h1 { color: #55FF55; margin-bottom: 10px; text-shadow: 2px 2px #000; }
         .subtitle { color: #888; margin-bottom: 40px; }
         
-        /* Project Grid */
+        /* Layout Grids */
         .grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 20px;
-            margin-bottom: 50px;
+            margin-bottom: 40px;
         }
         
         .card {
@@ -33,19 +33,26 @@
             transition: 0.3s;
             text-decoration: none;
             color: white;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
         }
         .card:hover { transform: translateY(-10px); border-color: #55FF55; background: #333; }
         .card h3 { color: #ffcc00; margin-top: 0; }
 
-        /* Interests & Tools Section */
+        /* Server Status Widget */
+        .mc-status {
+            background: #252525;
+            padding: 20px;
+            border-radius: 15px;
+            border: 2px solid #55FF55;
+            margin-bottom: 40px;
+        }
+        .mc-status h2 { color: #55FF55; margin-top: 0; font-size: 1.2rem; }
+        .status-info { font-family: monospace; color: #aaa; }
+
+        /* Interests & Tools */
         .info-section {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 20px;
-            margin-top: 30px;
             text-align: left;
         }
         .info-box {
@@ -57,7 +64,7 @@
         .info-box h2 { font-size: 1.2rem; color: #55FF55; margin-top: 0; }
         .info-box ul { list-style: none; padding: 0; }
         .info-box li { margin-bottom: 10px; color: #bbb; display: flex; align-items: center; }
-        .info-box i { color: #ffcc00; margin-right: 12px; width: 20px; text-align: center; }
+        .info-box i { color: #ffcc00; margin-right: 12px; }
 
         /* Socials */
         .social-section { border-top: 1px solid #444; margin-top: 50px; padding-top: 30px; }
@@ -73,6 +80,12 @@
     <div class="container">
         <h1>LuckyDuck's Portfolio</h1>
         <p class="subtitle">Minecraft Player | Duck Lover | Coder</p>
+
+        <div class="mc-status">
+            <h2><i class="fas fa-server"></i> Minecraft Server Status</h2>
+            <img src="wss://server.speedslicer.dev" alt="Minecraft Server Status" style="max-width: 100%; border-radius: 10px;">
+            <p class="status-info">Check if the server is online!</p>
+        </div>
 
         <div class="grid">
             <a href="https://luckyduck883.github.io/ImaSayDucks/" class="card">
@@ -93,19 +106,17 @@
             <div class="info-box">
                 <h2><i class="fas fa-star"></i> My Interests</h2>
                 <ul>
-                    <li><i class="fas fa-cube"></i> <b>Minecraft:</b> Building and survival.</li>
-                    <li><i class="fas fa-duck"></i> <b>Ducks:</b> The best animal, period.</li>
-                    <li><i class="fas fa-code"></i> <b>Coding:</b> Creating web projects like this!</li>
-                    <li><i class="fas fa-gamepad"></i> <b>Gaming:</b> Exploring new worlds.</li>
+                    <li><i class="fas fa-cube"></i> Minecraft & Survival</li>
+                    <li><i class="fas fa-feather-alt"></i> Ducks</li>
+                    <li><i class="fas fa-code"></i> Web Development</li>
                 </ul>
             </div>
             <div class="info-box">
                 <h2><i class="fas fa-tools"></i> My Setup</h2>
                 <ul>
-                    <li><i class="fab fa-github"></i> <b>GitHub:</b> Hosting my code.</li>
-                    <li><i class="fas fa-code-branch"></i> <b>VS Code:</b> My editor of choice.</li>
-                    <li><i class="fab fa-html5"></i> <b>HTML/CSS:</b> Building the frontend.</li>
-                    <li><i class="fas fa-server"></i> <b>is-a.dev:</b> My future custom domain.</li>
+                    <li><i class="fab fa-github"></i> GitHub Pages</li>
+                    <li><i class="fas fa-terminal"></i> VS Code</li>
+                    <li><i class="fas fa-globe"></i> is-a.dev</li>
                 </ul>
             </div>
         </div>
@@ -116,7 +127,7 @@
                 <a href="https://github.com/luckyduck883" class="social-icon" target="_blank"><i class="fab fa-github"></i></a>
                 <a href="#" class="social-icon" target="_blank"><i class="fab fa-discord"></i></a>
             </div>
-            <p style="margin-top: 20px; font-size: 0.8rem; color: #555;">© 2026 LuckyDuck</p>
+            <p style="margin-top: 20px; font-size: 0.8rem; color: #555;">2026 LuckyDuck</p>
         </div>
     </div>
 
