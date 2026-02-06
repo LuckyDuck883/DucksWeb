@@ -17,17 +17,67 @@
             --border: #30363d;
         }
 
-        body {
-            font-family: 'Inter', 'Segoe UI', sans-serif;
+        body, html {
+            margin: 0; padding: 0;
+            font-family: 'Inter', sans-serif;
             background-color: var(--bg-dark);
             color: var(--text-main);
-            margin: 0;
-            display: flex;
             height: 100vh;
             overflow: hidden;
         }
 
-        /* Sidebar Navigation */
+        /* Login Overlay */
+        #loginOverlay {
+            position: fixed;
+            inset: 0;
+            background: var(--bg-dark);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            transition: opacity 0.5s ease;
+        }
+
+        .login-box {
+            background: var(--sidebar-bg);
+            padding: 40px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            text-align: center;
+            box-shadow: 0 0 30px rgba(85, 255, 85, 0.1);
+        }
+
+        .login-box input {
+            background: #000;
+            border: 1px solid var(--border);
+            color: var(--accent);
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 20px;
+            width: 200px;
+            text-align: center;
+            font-family: monospace;
+        }
+
+        .login-btn {
+            background: var(--accent);
+            color: #000;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 5px;
+            margin-top: 15px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        /* Main Layout */
+        #mainApp {
+            display: none; /* Hidden until login */
+            height: 100vh;
+            width: 100vw;
+        }
+
         nav {
             width: 240px;
             background: var(--sidebar-bg);
@@ -37,31 +87,12 @@
             padding: 20px;
         }
 
-        .nav-logo { font-weight: bold; color: var(--accent); font-size: 1.5rem; margin-bottom: 30px; display: flex; align-items: center; gap: 10px; }
-        .nav-link { color: var(--text-main); text-decoration: none; padding: 12px; border-radius: 8px; margin-bottom: 5px; transition: 0.2s; display: flex; align-items: center; gap: 10px; }
-        .nav-link:hover { background: var(--card-bg); color: var(--accent); }
-        .nav-link.active { background: rgba(85, 255, 85, 0.1); color: var(--accent); border: 1px solid rgba(85, 255, 85, 0.2); }
+        .nav-logo { font-weight: bold; color: var(--accent); font-size: 1.4rem; margin-bottom: 30px; display: flex; align-items: center; gap: 10px; }
+        .nav-link { color: var(--text-main); text-decoration: none; padding: 12px; border-radius: 8px; margin-bottom: 5px; transition: 0.2s; display: flex; align-items: center; gap: 10px; font-size: 0.9rem; }
+        .nav-link:hover, .nav-link.active { background: var(--card-bg); color: var(--accent); }
 
-        /* Main Content Area */
-        main {
-            flex-grow: 1;
-            padding: 30px;
-            overflow-y: auto;
-            position: relative;
-        }
+        main { flex-grow: 1; padding: 30px; overflow-y: auto; }
 
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 30px;
-        }
-
-        .top-stats { display: flex; gap: 20px; }
-        .stat-badge { background: var(--card-bg); border: 1px solid var(--border); padding: 5px 15px; border-radius: 20px; font-size: 0.8rem; font-family: monospace; }
-        .stat-badge b { color: var(--accent); }
-
-        /* Dashboard Grid */
         .dashboard-grid {
             display: grid;
             grid-template-columns: 2fr 1fr;
@@ -73,151 +104,149 @@
             border: 1px solid var(--border);
             border-radius: 12px;
             padding: 20px;
+            margin-bottom: 20px;
         }
 
         .panel-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; border-bottom: 1px solid var(--border); padding-bottom: 10px; }
-        .panel-header h3 { margin: 0; font-size: 1rem; color: var(--accent); text-transform: uppercase; letter-spacing: 1px; }
+        .panel-header h3 { margin: 0; font-size: 0.8rem; color: var(--accent); text-transform: uppercase; letter-spacing: 1px; }
 
-        /* Game Area */
-        #gameArea { height: 300px; position: relative; overflow: hidden; background: #000; border-radius: 8px; }
-        .duck-target { font-size: 3rem; cursor: pointer; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); transition: 0.05s; z-index: 10; user-select: none; }
+        /* Game & Console */
+        #gameArea { height: 250px; position: relative; background: #000; border-radius: 8px; overflow: hidden; }
+        .duck-target { font-size: 3rem; cursor: pointer; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); user-select: none; }
 
-        /* Terminal Console */
         .console {
             background: #000;
-            font-family: 'Courier New', Courier, monospace;
-            font-size: 0.85rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.8rem;
             padding: 15px;
-            height: 200px;
+            height: 150px;
             overflow-y: auto;
-            border-radius: 8px;
             color: #888;
         }
-        .console .cmd { color: var(--accent); }
-        .console .info { color: var(--blue-accent); }
+        .console span.time { color: var(--accent); margin-right: 10px; }
 
-        /* Projects List */
-        .project-item {
-            display: flex;
-            justify-content: space-between;
-            padding: 10px;
-            border-radius: 6px;
-            text-decoration: none;
-            color: inherit;
-            margin-bottom: 8px;
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-        }
-        .project-item:hover { border-color: var(--accent); }
-
-        .dog-card { border-left: 4px solid var(--blue-accent); }
+        .stat-badge { background: var(--card-bg); border: 1px solid var(--border); padding: 4px 12px; border-radius: 20px; font-size: 0.7rem; font-family: monospace; }
+        .stat-badge b { color: var(--accent); }
     </style>
 </head>
 <body>
 
-    <nav>
-        <div class="nav-logo">🦆 LuckyDuck</div>
-        <a href="#" class="nav-link active"><i class="fas fa-th-large"></i> Dashboard</a>
-        <a href="https://luckyduck883.github.io/ImaSayDucks/" class="nav-link"><i class="fas fa-feather"></i> ImaSayDucks</a>
-        <a href="https://luckyduck883.github.io/Cha0sCraft/" class="nav-link"><i class="fas fa-swords"></i> Cha0sCraft</a>
-        <a href="https://github.com/luckyduck883" class="nav-link"><i class="fab fa-github"></i> GitHub</a>
-        <div style="margin-top: auto;">
-            <div class="nav-link" style="font-size: 0.8rem; color: var(--text-sub);">
-                <i class="fas fa-clock"></i> <span id="liveClock">00:00:00</span>
-            </div>
+    <div id="loginOverlay">
+        <div class="login-box">
+            <div style="font-size: 3rem;">🦆</div>
+            <h2 style="margin: 10px 0 0 0; color: var(--accent);">LuckyDuck Terminal</h2>
+            <p style="font-size: 0.8rem; color: var(--text-sub);">RESTRICTED DEVELOPER ACCESS</p>
+            <input type="password" id="passInput" placeholder="ENTER ACCESS KEY">
+            <br>
+            <button class="login-btn" onclick="checkPass()">AUTHENTICATE</button>
+            <p id="loginError" style="color: #ff4444; font-size: 0.7rem; margin-top: 10px; opacity: 0;"></p>
         </div>
-    </nav>
+    </div>
 
-    <main>
-        <header>
-            <h2 style="margin:0;">Developer Overview</h2>
-            <div class="top-stats">
-                <div class="stat-badge">STATUS: <b>READY</b></div>
-                <div class="stat-badge">VERSION: <b>3.0.0</b></div>
-                <div class="stat-badge">PING: <b>14ms</b></div>
+    <div id="mainApp" style="display: flex;">
+        <nav>
+            <div class="nav-logo">🦆 LuckyDuck</div>
+            <a href="#" class="nav-link active"><i class="fas fa-terminal"></i> Dashboard</a>
+            <a href="https://scratch.mit.edu/users/DANUGGET21/" target="_blank" class="nav-link"><i class="fas fa-cat"></i> Scratch Profile</a>
+            <a href="https://luckyduck883.github.io/ImaSayDucks/" target="_blank" class="nav-link"><i class="fas fa-feather"></i> ImaSayDucks</a>
+            <a href="https://github.com/luckyduck883" target="_blank" class="nav-link"><i class="fab fa-github"></i> GitHub Main</a>
+            
+            <div style="margin-top: auto; font-family: monospace; font-size: 0.7rem;">
+                <div style="color: var(--accent);">SYS_TIME: <span id="clock">00:00</span></div>
+                <div style="color: var(--text-sub);">LOC: US-EAST-1</div>
             </div>
-        </header>
+        </nav>
 
-        <div class="dashboard-grid">
-            <div class="left-col">
-                <div class="panel" style="margin-bottom: 20px;">
-                    <div class="panel-header">
-                        <h3><i class="fas fa-crosshairs"></i> Aim Trainer (v3)</h3>
-                        <span style="font-family: monospace;">CLICKS: <b id="score" style="color: var(--gold);">0</b></span>
-                    </div>
-                    <div id="gameArea">
-                        <div class="duck-target" id="duck" onclick="moveDuck()">🦆</div>
-                    </div>
-                </div>
-
-                <div class="panel">
-                    <div class="panel-header"><h3><i class="fas fa-terminal"></i> System Console</h3></div>
-                    <div class="console" id="console">
-                        <div>[SYSTEM] Initializing DucksWeb Kernel...</div>
-                        <div>[SYSTEM] Luna & Ryder modules loaded.</div>
-                        <div class="info">[INFO] Chilling mode active.</div>
-                    </div>
+        <main>
+            <div style="display: flex; justify-content: space-between; margin-bottom: 20px;">
+                <h2 style="margin:0;">Mainframe Control</h2>
+                <div style="display: flex; gap: 10px;">
+                    <div class="stat-badge">DB_SYNC: <b>OK</b></div>
+                    <div class="stat-badge">VER: <b>4.0.1</b></div>
                 </div>
             </div>
 
-            <div class="right-col">
-                <div class="panel dog-card" style="margin-bottom: 20px;">
-                    <div class="panel-header"><h3><i class="fas fa-dog"></i> Companions</h3></div>
-                    <p style="font-size: 0.9rem;"><b>Luna & Ryder</b> are currently monitoring development.</p>
-                    <button onclick="logAction('Treat dispensed to Luna & Ryder.')" style="width:100%; padding: 8px; background: var(--blue-accent); border: none; border-radius: 5px; cursor: pointer; color: white; font-weight: bold;">GIVE TREAT</button>
+            <div class="dashboard-grid">
+                <div>
+                    <div class="panel">
+                        <div class="panel-header">
+                            <h3>Duck Calibration Unit</h3>
+                            <span style="font-family: monospace;">HITS: <b id="score" style="color: var(--gold);">0</b></span>
+                        </div>
+                        <div id="gameArea">
+                            <div class="duck-target" id="duck" onclick="moveDuck()">🦆</div>
+                        </div>
+                    </div>
+
+                    <div class="panel">
+                        <div class="panel-header"><h3>Log Output</h3></div>
+                        <div class="console" id="console">
+                            <div><span class="time">[11:10:00]</span> Kernel Authenticated. Welcome, LuckyDuck.</div>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="panel">
-                    <div class="panel-header"><h3><i class="fas fa-code-branch"></i> Projects</h3></div>
-                    <a href="https://luckyduck883.github.io/ImaSayDucks/" class="project-item"><span>ImaSayDucks</span> <i class="fas fa-external-link-alt"></i></a>
-                    <a href="https://luckyduck883.github.io/Cha0sCraft/" class="project-item"><span>Cha0sCraft</span> <i class="fas fa-external-link-alt"></i></a>
-                    <a href="https://luckyduck883.github.io/BioRoll/" class="project-item"><span>BioRoll</span> <i class="fas fa-external-link-alt"></i></a>
-                </div>
+                <div>
+                    <div class="panel" style="border-left: 4px solid var(--blue-accent);">
+                        <div class="panel-header"><h3>Dogs Section</h3></div>
+                        <p style="font-size: 0.85rem;"><b>Luna & Ryder</b> detected in proximity.</p>
+                        <button onclick="logMsg('Dispensed treats to Luna & Ryder.')" style="width:100%; padding: 10px; background: var(--blue-accent); border: none; border-radius: 5px; color: white; cursor: pointer; font-weight: bold;">GIVE TREAT</button>
+                    </div>
 
-                <div class="panel" style="margin-top: 20px; font-size: 0.8rem;">
-                    <div class="panel-header"><h3>Changelog</h3></div>
-                    <div style="color: var(--accent); margin-bottom: 5px;">v3.0.0 (3m ago)</div>
-                    <div style="color: var(--text-sub);">UI Overhaul to Dashboard style.</div>
-                    <hr style="border: 0; border-top: 1px solid var(--border); margin: 10px 0;">
-                    <div style="color: var(--accent); margin-bottom: 5px;">v2.7.0 (1h ago)</div>
-                    <div style="color: var(--text-sub);">Integrated system clock.</div>
+                    <div class="panel">
+                        <div class="panel-header"><h3>Change History</h3></div>
+                        <div style="font-size: 0.75rem; color: var(--accent);">Just Now</div>
+                        <div style="font-size: 0.8rem; color: var(--text-sub); margin-bottom: 10px;">Implemented login security & Scratch integration.</div>
+                        <div style="font-size: 0.75rem; color: var(--accent);">1h ago</div>
+                        <div style="font-size: 0.8rem; color: var(--text-sub);">Optimized CSS for Dashboard layout.</div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </main>
+        </main>
+    </div>
 
     <script>
-        let clicks = 0;
+        // Password logic (Set your password here!)
+        function checkPass() {
+            const pass = document.getElementById('passInput').value;
+            if (pass === "lucky") { // Change "lucky" to whatever you want
+                document.getElementById('loginOverlay').style.opacity = '0';
+                setTimeout(() => {
+                    document.getElementById('loginOverlay').style.display = 'none';
+                    document.getElementById('mainApp').style.display = 'flex';
+                    logMsg("Dashboard loaded successfully.");
+                }, 500);
+            } else {
+                const err = document.getElementById('loginError');
+                err.innerText = "INVALID ACCESS KEY";
+                err.style.opacity = "1";
+            }
+        }
 
-        function logAction(msg) {
-            const consoleBox = document.getElementById('console');
+        function logMsg(msg) {
+            const box = document.getElementById('console');
             const time = new Date().toLocaleTimeString([], { hour12: false });
-            const entry = document.createElement('div');
-            entry.innerHTML = `<span class="cmd">[${time}]</span> ${msg}`;
-            consoleBox.appendChild(entry);
-            consoleBox.scrollTop = consoleBox.scrollHeight;
+            box.innerHTML += `<div><span class="time">[${time}]</span> ${msg}</div>`;
+            box.scrollTop = box.scrollHeight;
         }
 
         function moveDuck() {
-            clicks++;
-            document.getElementById('score').innerText = clicks;
-            logAction(`Duck target hit! Total: ${clicks}`);
-            
             const duck = document.getElementById('duck');
             const area = document.getElementById('gameArea');
-            const maxX = area.clientWidth - 80;
-            const maxY = area.clientHeight - 80;
-            
-            duck.style.left = (Math.random() * maxX + 10) + 'px';
-            duck.style.top = (Math.random() * maxY + 30) + 'px';
+            const x = Math.random() * (area.clientWidth - 60);
+            const y = Math.random() * (area.clientHeight - 60);
+            duck.style.left = x + 'px';
+            duck.style.top = y + 'px';
             duck.style.transform = 'none';
+            
+            let s = document.getElementById('score');
+            s.innerText = parseInt(s.innerText) + 1;
+            logMsg(`Duck recalibrated at POS: ${Math.floor(x)}, ${Math.floor(y)}`);
         }
 
-        function updateClock() {
-            document.getElementById('liveClock').innerText = new Date().toLocaleTimeString();
-        }
-        setInterval(updateClock, 1000);
-        updateClock();
+        setInterval(() => {
+            document.getElementById('clock').innerText = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+        }, 1000);
     </script>
 </body>
 </html>
