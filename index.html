@@ -49,6 +49,7 @@
 
         h1 { color: var(--accent); margin-bottom: 5px; text-shadow: 2px 2px rgba(0,0,0,0.2); font-size: 3.5rem; }
         
+        /* Fact Box with Refresh Button */
         .fact-box {
             background: var(--container-bg);
             padding: 20px;
@@ -57,11 +58,24 @@
             margin-bottom: 30px;
             display: flex;
             align-items: center;
-            justify-content: center;
+            justify-content: space-between;
             gap: 15px;
+            min-height: 60px;
         }
-        .fact-box i { color: var(--secondary-accent); font-size: 1.5rem; }
-        .fact-text { font-style: italic; font-size: 1rem; color: var(--text-main); }
+        .fact-content { display: flex; align-items: center; gap: 15px; text-align: left; }
+        .fact-box i.fa-lightbulb { color: var(--secondary-accent); font-size: 1.5rem; }
+        .fact-text { font-style: italic; font-size: 1rem; color: var(--text-main); transition: opacity 0.2s; }
+        
+        .refresh-btn {
+            background: none;
+            border: none;
+            color: var(--text-sub);
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: 0.3s;
+            padding: 5px;
+        }
+        .refresh-btn:hover { color: var(--accent); transform: rotate(180deg); }
 
         .message-box {
             background: var(--card-bg);
@@ -103,12 +117,17 @@
         <h1>LuckyDuck</h1>
         
         <div class="fact-box">
-            <i class="fas fa-lightbulb"></i>
-            <span class="fact-text" id="duckFact">Loading duck wisdom...</span>
+            <div class="fact-content">
+                <i class="fas fa-lightbulb"></i>
+                <span class="fact-text" id="duckFact">Loading duck wisdom...</span>
+            </div>
+            <button class="refresh-btn" onclick="setFact()" title="New Fact">
+                <i class="fas fa-sync-alt"></i>
+            </button>
         </div>
 
         <div class="message-box">
-            <p>"Welcome to my page! I'll be posting my latest Minecraft builds and Scratch projects here. Check back often to see what I'm creating!"</p>
+            <p>"Welcome to my page! I'll be posting my latest Scratch projects here. Check back often to see what I'm creating!"</p>
         </div>
 
         <h2 style="color: var(--accent); text-align: left; margin-bottom: 20px;">My Creations</h2>
@@ -151,8 +170,16 @@
         ];
 
         function setFact() {
-            const randomFact = facts[Math.floor(Math.random() * facts.length)];
-            document.getElementById('duckFact').innerText = randomFact;
+            const factElement = document.getElementById('duckFact');
+            // Fade out
+            factElement.style.opacity = 0;
+            
+            setTimeout(() => {
+                const randomFact = facts[Math.floor(Math.random() * facts.length)];
+                factElement.innerText = randomFact;
+                // Fade back in
+                factElement.style.opacity = 1;
+            }, 200);
         }
 
         function toggleTheme() {
