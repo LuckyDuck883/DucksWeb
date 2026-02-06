@@ -49,18 +49,29 @@
 
         h1 { color: var(--accent); margin-bottom: 5px; text-shadow: 2px 2px rgba(0,0,0,0.2); font-size: 3.5rem; }
 
-        /* Progress Section */
-        .progress-section {
+        /* Poll Section */
+        .poll-box {
             background: var(--container-bg);
-            padding: 20px;
-            border-radius: 15px;
+            padding: 25px;
+            border-radius: 20px;
             border: 1px solid var(--border);
             margin-bottom: 30px;
             text-align: left;
         }
-        .progress-header { display: flex; justify-content: space-between; margin-bottom: 10px; font-weight: bold; }
-        .progress-bar-bg { background: #444; height: 12px; border-radius: 10px; overflow: hidden; }
-        .progress-bar-fill { background: var(--accent); width: 75%; height: 100%; box-shadow: 0 0 10px var(--accent); }
+        .poll-box h3 { margin-top: 0; color: var(--accent); }
+        .poll-option {
+            background: var(--card-bg);
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 10px;
+            cursor: pointer;
+            border: 1px solid transparent;
+            display: flex;
+            justify-content: space-between;
+            transition: 0.2s;
+        }
+        .poll-option:hover { border-color: var(--secondary-accent); }
+        .poll-option.selected { border-color: var(--accent); background: rgba(85, 255, 85, 0.1); }
 
         /* Duck Clicker Game */
         .clicker-box {
@@ -95,7 +106,6 @@
         
         .social-links { display: flex; justify-content: center; gap: 40px; margin-top: 50px; border-top: 1px solid var(--border); padding-top: 30px; }
         .social-icon { color: var(--text-sub); font-size: 2.5rem; transition: 0.3s; }
-        .social-icon:hover { transform: scale(1.1); color: var(--accent); }
     </style>
 </head>
 <body>
@@ -107,13 +117,19 @@
 
         <h1>LuckyDuck</h1>
 
-        <div class="progress-section">
-            <div class="progress-header">
-                <span>Current Goal: Coding my Website</span>
-                <span>75%</span>
+        <div class="poll-box">
+            <h3>🗳️ What should I build next?</h3>
+            <div class="poll-option" onclick="vote(this)">
+                <span>Giant Duck Statue</span>
+                <span class="vote-count">0</span>
             </div>
-            <div class="progress-bar-bg">
-                <div class="progress-bar-fill"></div>
+            <div class="poll-option" onclick="vote(this)">
+                <span>Underwater Base</span>
+                <span class="vote-count">0</span>
+            </div>
+            <div class="poll-option" onclick="vote(this)">
+                <span>Redstone Farm</span>
+                <span class="vote-count">0</span>
             </div>
         </div>
 
@@ -132,7 +148,7 @@
         </div>
 
         <div class="message-box">
-            <p>"Welcome to DucksWeb! Feel free to click around, check out my projects, and see how many ducks you can click!"</p>
+            <p>"Welcome to DucksWeb! Vote on what I should do next and try to beat the duck clicker score!"</p>
         </div>
 
         <div class="grid">
@@ -158,21 +174,29 @@
     </div>
 
     <script>
+        // Duck Clicker logic
         let clicks = 0;
         function clickDuck() {
             clicks++;
             document.getElementById('clickCount').innerText = clicks;
         }
 
+        // Simple Voting logic (Reset on refresh for now)
+        function vote(el) {
+            const countSpan = el.querySelector('.vote-count');
+            let currentVotes = parseInt(countSpan.innerText);
+            countSpan.innerText = currentVotes + 1;
+            el.classList.add('selected');
+        }
+
+        // Duck Facts logic
         const facts = [
             "Ducks have highly waterproof feathers thanks to a special oil gland.",
             "A group of ducks is called a 'raft' when they are on water!",
             "Most ducks have a 360-degree field of vision.",
             "Ducks can sleep with one eye open to stay alert for predators!",
             "Ducks can fly as fast as 60 miles per hour!",
-            "Ducklings can walk and swim almost immediately after hatching.",
-            "Ducks are found on every continent except Antarctica.",
-            "A duck's feathers are so waterproof that the under-layer stays dry!"
+            "Ducklings can walk and swim almost immediately after hatching."
         ];
 
         function setFact() {
