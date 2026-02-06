@@ -49,40 +49,39 @@
 
         h1 { color: var(--accent); margin-bottom: 5px; text-shadow: 2px 2px rgba(0,0,0,0.2); font-size: 3.5rem; }
 
+        /* Duck Clicker Game with High Score */
+        .clicker-box {
+            background: var(--card-bg);
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            border: 2px solid var(--secondary-accent);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        .score-container { display: flex; justify-content: space-around; margin-bottom: 15px; }
+        .score-label { font-size: 0.9rem; color: var(--text-sub); text-transform: uppercase; letter-spacing: 1px; }
+        .score-num { font-size: 1.5rem; color: var(--secondary-accent); font-weight: bold; display: block; }
+        
+        .duck-btn { 
+            font-size: 4rem; 
+            cursor: pointer; 
+            display: inline-block; 
+            transition: transform 0.1s; 
+            user-select: none;
+            filter: drop-shadow(0 0 10px rgba(255, 204, 0, 0.3));
+        }
+        .duck-btn:active { transform: scale(0.85) rotate(-10deg); }
+
         /* Poll Section */
         .poll-box {
             background: var(--container-bg);
-            padding: 25px;
-            border-radius: 20px;
-            border: 1px solid var(--border);
-            margin-bottom: 30px;
-            text-align: left;
+            padding: 25px; border-radius: 20px; border: 1px solid var(--border); margin-bottom: 30px; text-align: left;
         }
-        .poll-box h3 { margin-top: 0; color: var(--accent); }
         .poll-option {
-            background: var(--card-bg);
-            padding: 12px;
-            margin: 10px 0;
-            border-radius: 10px;
-            cursor: pointer;
-            border: 1px solid transparent;
-            display: flex;
-            justify-content: space-between;
-            transition: 0.2s;
+            background: var(--card-bg); padding: 12px; margin: 10px 0; border-radius: 10px; cursor: pointer;
+            display: flex; justify-content: space-between; transition: 0.2s;
         }
-        .poll-option:hover { border-color: var(--secondary-accent); }
-        .poll-option.selected { border-color: var(--accent); background: rgba(85, 255, 85, 0.1); }
-
-        /* Duck Clicker Game */
-        .clicker-box {
-            background: var(--card-bg);
-            padding: 20px;
-            border-radius: 15px;
-            margin-bottom: 30px;
-            border: 1px solid var(--secondary-accent);
-        }
-        .duck-btn { font-size: 3.5rem; cursor: pointer; display: inline-block; transition: transform 0.1s; user-select: none; }
-        .duck-btn:active { transform: scale(0.8); }
+        .poll-option:hover { border: 1px solid var(--secondary-accent); }
 
         .fact-box {
             background: var(--container-bg);
@@ -117,26 +116,26 @@
 
         <h1>LuckyDuck</h1>
 
-        <div class="poll-box">
-            <h3>🗳️ What should I build next?</h3>
-            <div class="poll-option" onclick="vote(this)">
-                <span>Giant Duck Statue</span>
-                <span class="vote-count">0</span>
+        <div class="clicker-box">
+            <div class="score-container">
+                <div>
+                    <span class="score-label">Current Clicks</span>
+                    <span class="score-num" id="clickCount">0</span>
+                </div>
+                <div>
+                    <span class="score-label">LuckyDuck's High Score</span>
+                    <span class="score-num" id="highScore">1000</span>
+                </div>
             </div>
-            <div class="poll-option" onclick="vote(this)">
-                <span>Underwater Base</span>
-                <span class="vote-count">0</span>
-            </div>
-            <div class="poll-option" onclick="vote(this)">
-                <span>Redstone Farm</span>
-                <span class="vote-count">0</span>
-            </div>
+            <div class="duck-btn" onclick="clickDuck()">🦆</div>
+            <p id="congrats" style="color: var(--accent); font-weight: bold; margin-top: 10px; height: 20px;"></p>
         </div>
 
-        <div class="clicker-box">
-            <p style="margin-top: 0; color: var(--secondary-accent); font-weight: bold;">Duck Clicker</p>
-            <div class="duck-btn" onclick="clickDuck()">🦆</div>
-            <h2 id="clickCount" style="margin: 10px 0 0 0;">0</h2>
+        <div class="poll-box">
+            <h3 style="color: var(--accent); margin-top:0;">🗳️ What should I build next?</h3>
+            <div class="poll-option" onclick="vote(this)"><span>Giant Duck Statue</span><span class="vote-count">0</span></div>
+            <div class="poll-option" onclick="vote(this)"><span>Underwater Base</span><span class="vote-count">0</span></div>
+            <div class="poll-option" onclick="vote(this)"><span>Redstone Farm</span><span class="vote-count">0</span></div>
         </div>
 
         <div class="fact-box">
@@ -148,22 +147,13 @@
         </div>
 
         <div class="message-box">
-            <p>"Welcome to DucksWeb! Vote on what I should do next and try to beat the duck clicker score!"</p>
+            <p>"Can you beat my high score? It took a lot of clicking!"</p>
         </div>
 
         <div class="grid">
-            <a href="https://luckyduck883.github.io/ImaSayDucks/" class="card">
-                <h3>🦆 ImaSayDucks</h3>
-                <p>Everything duck-related.</p>
-            </a>
-            <a href="https://luckyduck883.github.io/Cha0sCraft/" class="card">
-                <h3>⚔️ Cha0sCraft</h3>
-                <p>Latest gaming updates.</p>
-            </a>
-            <a href="https://luckyduck883.github.io/BioRoll/" class="card">
-                <h3>🎲 BioRoll</h3>
-                <p>Cool bio generator tool.</p>
-            </a>
+            <a href="https://luckyduck883.github.io/ImaSayDucks/" class="card"><h3>🦆 ImaSayDucks</h3><p>Everything duck-related.</p></a>
+            <a href="https://luckyduck883.github.io/Cha0sCraft/" class="card"><h3>⚔️ Cha0sCraft</h3><p>Latest gaming updates.</p></a>
+            <a href="https://luckyduck883.github.io/BioRoll/" class="card"><h3>🎲 BioRoll</h3><p>Cool bio generator tool.</p></a>
         </div>
 
         <div class="social-links">
@@ -174,22 +164,31 @@
     </div>
 
     <script>
-        // Duck Clicker logic
-        let clicks = 0;
+        // Set YOUR high score here!
+        let myBest = 100000; 
+        let currentClicks = 0;
+        let beatRecord = false;
+
         function clickDuck() {
-            clicks++;
-            document.getElementById('clickCount').innerText = clicks;
+            currentClicks++;
+            document.getElementById('clickCount').innerText = currentClicks;
+
+            if (currentClicks > myBest && !beatRecord) {
+                beatRecord = true;
+                document.getElementById('congrats').innerText = "🏆 NEW WORLD RECORD!";
+                document.getElementById('highScore').style.color = "#55FF55";
+            }
+            
+            if (beatRecord) {
+                document.getElementById('highScore').innerText = currentClicks;
+            }
         }
 
-        // Simple Voting logic (Reset on refresh for now)
         function vote(el) {
             const countSpan = el.querySelector('.vote-count');
-            let currentVotes = parseInt(countSpan.innerText);
-            countSpan.innerText = currentVotes + 1;
-            el.classList.add('selected');
+            countSpan.innerText = parseInt(countSpan.innerText) + 1;
         }
 
-        // Duck Facts logic
         const facts = [
             "Ducks have highly waterproof feathers thanks to a special oil gland.",
             "A group of ducks is called a 'raft' when they are on water!",
@@ -200,14 +199,12 @@
         ];
 
         function setFact() {
-            const randomFact = facts[Math.floor(Math.random() * facts.length)];
-            document.getElementById('duckFact').innerText = randomFact;
+            document.getElementById('duckFact').innerText = facts[Math.floor(Math.random() * facts.length)];
         }
 
         function toggleTheme() {
             const body = document.body;
-            const btn = document.getElementById('themeBtn');
-            const icon = btn.querySelector('i');
+            const icon = document.getElementById('themeBtn').querySelector('i');
             if (body.hasAttribute('data-theme')) {
                 body.removeAttribute('data-theme');
                 icon.className = 'fas fa-moon';
