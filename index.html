@@ -30,25 +30,35 @@
         .status-dot {
             height: 12px;
             width: 12px;
-            background-color: #55FF55; /* Change to #ffcc00 for Away, #ff4444 for Busy */
+            background-color: #55FF55; 
             border-radius: 50%;
             display: inline-block;
             margin-right: 10px;
             box-shadow: 0 0 8px #55FF55;
         }
 
-        /* About Section */
-        .about-box {
-            background: #252525;
-            padding: 30px;
+        /* Message from Me Box */
+        .message-box {
+            background: #2d2d2d;
+            padding: 25px;
             border-radius: 20px;
-            border: 2px solid #55FF55;
+            border: 2px dashed #ffcc00;
             margin-bottom: 40px;
-            text-align: left;
-            line-height: 1.6;
+            position: relative;
         }
-        .about-box h2 { color: #55FF55; margin-top: 0; font-size: 1.5rem; }
-        .about-box p { color: #ccc; font-size: 1.1rem; }
+        .message-box::before {
+            content: "Update from LuckyDuck";
+            position: absolute;
+            top: -12px;
+            left: 20px;
+            background: #ffcc00;
+            color: #1a1a1a;
+            padding: 2px 12px;
+            border-radius: 10px;
+            font-weight: bold;
+            font-size: 0.8rem;
+        }
+        .message-box p { font-style: italic; color: #eee; font-size: 1.1rem; margin: 0; }
 
         /* Project Grid */
         .grid {
@@ -58,7 +68,7 @@
             margin-bottom: 40px;
         }
         .card {
-            background: #2d2d2d;
+            background: #252525;
             padding: 20px;
             border-radius: 15px;
             border: 1px solid #444;
@@ -66,10 +76,10 @@
             text-decoration: none;
             color: white;
         }
-        .card:hover { transform: translateY(-5px); border-color: #ffcc00; background: #333; }
+        .card:hover { transform: translateY(-5px); border-color: #55FF55; }
         .card h3 { color: #ffcc00; margin-bottom: 10px; }
 
-        /* Interests & Tools */
+        /* Info Section */
         .info-section {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -91,9 +101,7 @@
         .social-section { border-top: 1px solid #444; margin-top: 50px; padding-top: 30px; }
         .social-links { display: flex; justify-content: center; gap: 40px; margin-top: 15px; }
         .social-icon { color: #bbb; font-size: 2.5rem; transition: 0.3s; }
-        .social-icon:hover { transform: scale(1.1); }
-        .github:hover { color: #ffffff; }
-        .scratch:hover { color: #ffab19; }
+        .social-icon:hover { transform: scale(1.1); color: #55FF55; }
 
         @media (max-width: 600px) { .info-section { grid-template-columns: 1fr; } }
     </style>
@@ -105,44 +113,40 @@
         
         <div class="status-badge">
             <span class="status-dot"></span>
-            <span>Currently Active</span>
+            <span>Currently Online</span>
         </div>
 
-        <div class="about-box">
-            <h2>Welcome!</h2>
-            <p>I created this page as a place for my <b>friends and family</b> to hang out and see what I've been up to. This is my personal hub where you can check out my latest creations, see if I'm currently active, and explore the projects I'm working on!</p>
+        <div class="message-box">
+            <p>"Welcome to my page! I'll be posting my latest Minecraft builds and Scratch projects here. Check back often to see what I'm creating!"</p>
         </div>
 
+        <h2 style="color: #55FF55; text-align: left; margin-bottom: 20px;">My Creations</h2>
         <div class="grid">
             <a href="https://luckyduck883.github.io/ImaSayDucks/" class="card">
                 <h3>🦆 ImaSayDucks</h3>
-                <p>Check out my latest duck-themed project.</p>
+                <p>A fun project dedicated to our feathered friends.</p>
             </a>
             <a href="https://luckyduck883.github.io/Cha0sCraft/" class="card">
                 <h3>⚔️ Cha0sCraft</h3>
-                <p>The latest updates on my gaming world.</p>
+                <p>Updates on my latest gaming adventures.</p>
             </a>
             <a href="https://luckyduck883.github.io/BioRoll/" class="card">
                 <h3>🎲 BioRoll</h3>
-                <p>A fun game thats a rng sim.</p>
+                <p>A Rng Game.</p>
             </a>
         </div>
 
         <div class="info-section">
             <div class="info-box">
-                <h2><i class="fas fa-star"></i> My Interests</h2>
+                <h2><i class="fas fa-user-friends"></i> For Family</h2>
+                <p style="font-size: 0.9rem; color: #aaa;">This site is my way of showing you what I'm learning in the world of code!</p>
+            </div>
+            <div class="info-box">
+                <h2><i class="fas fa-heart"></i> Favorites</h2>
                 <ul>
                     <li><i class="fas fa-cube"></i> Minecraft</li>
                     <li><i class="fas fa-feather-alt"></i> Ducks</li>
                     <li><i class="fas fa-code"></i> Coding</li>
-                </ul>
-            </div>
-            <div class="info-box">
-                <h2><i class="fas fa-tools"></i> My Setup</h2>
-                <ul>
-                    <li><i class="fab fa-github"></i> GitHub</li>
-                    <li><i class="fas fa-terminal"></i> VS Code</li>
-                    <li><i class="fas fa-cat"></i> Scratch</li>
                 </ul>
             </div>
         </div>
@@ -150,8 +154,8 @@
         <div class="social-section">
             <h3>Find Me Here</h3>
             <div class="social-links">
-                <a href="https://github.com/luckyduck883" class="social-icon github" target="_blank"><i class="fab fa-github"></i></a>
-                <a href="https://scratch.mit.edu/users/DANUGGET21/" class="social-icon scratch" target="_blank"><i class="fas fa-cat"></i></a>
+                <a href="https://github.com/luckyduck883" class="social-icon" target="_blank"><i class="fab fa-github"></i></a>
+                <a href="https://scratch.mit.edu/users/DANUGGET21/" class="social-icon" target="_blank"><i class="fas fa-cat"></i></a>
             </div>
             <p style="margin-top: 20px; font-size: 0.9rem; color: #555;">2026 LuckyDuck</p>
         </div>
