@@ -23,61 +23,11 @@
             background-color: var(--bg-dark);
             color: var(--text-main);
             height: 100vh;
+            display: flex;
             overflow: hidden;
         }
 
-        /* Login Overlay */
-        #loginOverlay {
-            position: fixed;
-            inset: 0;
-            background: var(--bg-dark);
-            z-index: 1000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-            transition: opacity 0.5s ease;
-        }
-
-        .login-box {
-            background: var(--sidebar-bg);
-            padding: 40px;
-            border-radius: 12px;
-            border: 1px solid var(--border);
-            text-align: center;
-            box-shadow: 0 0 30px rgba(85, 255, 85, 0.1);
-        }
-
-        .login-box input {
-            background: #000;
-            border: 1px solid var(--border);
-            color: var(--accent);
-            padding: 10px;
-            border-radius: 5px;
-            margin-top: 20px;
-            width: 200px;
-            text-align: center;
-            font-family: monospace;
-        }
-
-        .login-btn {
-            background: var(--accent);
-            color: #000;
-            border: none;
-            padding: 10px 25px;
-            border-radius: 5px;
-            margin-top: 15px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-        /* Main Layout */
-        #mainApp {
-            display: none; /* Hidden until login */
-            height: 100vh;
-            width: 100vw;
-        }
-
+        /* Sidebar Navigation */
         nav {
             width: 240px;
             background: var(--sidebar-bg);
@@ -91,7 +41,15 @@
         .nav-link { color: var(--text-main); text-decoration: none; padding: 12px; border-radius: 8px; margin-bottom: 5px; transition: 0.2s; display: flex; align-items: center; gap: 10px; font-size: 0.9rem; }
         .nav-link:hover, .nav-link.active { background: var(--card-bg); color: var(--accent); }
 
+        /* Main Content */
         main { flex-grow: 1; padding: 30px; overflow-y: auto; }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
 
         .dashboard-grid {
             display: grid;
@@ -111,118 +69,111 @@
         .panel-header h3 { margin: 0; font-size: 0.8rem; color: var(--accent); text-transform: uppercase; letter-spacing: 1px; }
 
         /* Game & Console */
-        #gameArea { height: 250px; position: relative; background: #000; border-radius: 8px; overflow: hidden; }
-        .duck-target { font-size: 3rem; cursor: pointer; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); user-select: none; }
+        #gameArea { height: 250px; position: relative; background: #000; border-radius: 8px; overflow: hidden; border: 1px solid #111; }
+        .duck-target { font-size: 3rem; cursor: pointer; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); user-select: none; z-index: 5; }
 
         .console {
-            background: #000;
+            background: #050505;
             font-family: 'Courier New', monospace;
             font-size: 0.8rem;
             padding: 15px;
-            height: 150px;
+            height: 140px;
             overflow-y: auto;
             color: #888;
+            border-radius: 8px;
         }
         .console span.time { color: var(--accent); margin-right: 10px; }
 
-        .stat-badge { background: var(--card-bg); border: 1px solid var(--border); padding: 4px 12px; border-radius: 20px; font-size: 0.7rem; font-family: monospace; }
+        .stat-badge { background: var(--card-bg); border: 1px solid var(--border); padding: 5px 12px; border-radius: 20px; font-size: 0.7rem; font-family: monospace; }
         .stat-badge b { color: var(--accent); }
+
+        /* Links */
+        .project-link {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            color: var(--text-main);
+            text-decoration: none;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+        }
+        .project-link:hover { border-color: var(--accent); }
+
     </style>
 </head>
 <body>
 
-    <div id="loginOverlay">
-        <div class="login-box">
-            <div style="font-size: 3rem;">🦆</div>
-            <h2 style="margin: 10px 0 0 0; color: var(--accent);">LuckyDuck Terminal</h2>
-            <p style="font-size: 0.8rem; color: var(--text-sub);">RESTRICTED DEVELOPER ACCESS</p>
-            <input type="password" id="passInput" placeholder="ENTER ACCESS KEY">
-            <br>
-            <button class="login-btn" onclick="checkPass()">AUTHENTICATE</button>
-            <p id="loginError" style="color: #ff4444; font-size: 0.7rem; margin-top: 10px; opacity: 0;"></p>
+    <nav>
+        <div class="nav-logo">🦆 LuckyDuck</div>
+        <a href="#" class="nav-link active"><i class="fas fa-terminal"></i> Dashboard</a>
+        <a href="https://scratch.mit.edu/users/DANUGGET21/" target="_blank" class="nav-link"><i class="fas fa-cat"></i> Scratch Profile</a>
+        <a href="https://luckyduck883.github.io/ImaSayDucks/" target="_blank" class="nav-link"><i class="fas fa-feather"></i> ImaSayDucks</a>
+        <a href="https://github.com/luckyduck883" target="_blank" class="nav-link"><i class="fab fa-github"></i> GitHub Main</a>
+        
+        <div style="margin-top: auto; font-family: monospace; font-size: 0.7rem;">
+            <div style="color: var(--accent);">SYS_TIME: <span id="clock">00:00</span></div>
+            <div style="color: var(--text-sub);">STATUS: ONLINE</div>
         </div>
-    </div>
+    </nav>
 
-    <div id="mainApp" style="display: flex;">
-        <nav>
-            <div class="nav-logo">🦆 LuckyDuck</div>
-            <a href="#" class="nav-link active"><i class="fas fa-terminal"></i> Dashboard</a>
-            <a href="https://scratch.mit.edu/users/DANUGGET21/" target="_blank" class="nav-link"><i class="fas fa-cat"></i> Scratch Profile</a>
-            <a href="https://luckyduck883.github.io/ImaSayDucks/" target="_blank" class="nav-link"><i class="fas fa-feather"></i> ImaSayDucks</a>
-            <a href="https://github.com/luckyduck883" target="_blank" class="nav-link"><i class="fab fa-github"></i> GitHub Main</a>
-            
-            <div style="margin-top: auto; font-family: monospace; font-size: 0.7rem;">
-                <div style="color: var(--accent);">SYS_TIME: <span id="clock">00:00</span></div>
-                <div style="color: var(--text-sub);">LOC: US-EAST-1</div>
+    <main>
+        <header>
+            <h2 style="margin:0;">Developer Mainframe</h2>
+            <div style="display: flex; gap: 10px;">
+                <div class="stat-badge">DB_SYNC: <b>OK</b></div>
+                <div class="stat-badge">VER: <b>4.2.0</b></div>
             </div>
-        </nav>
+        </header>
 
-        <main>
-            <div style="display: flex; justify-content: space-between; margin-bottom: 20px;">
-                <h2 style="margin:0;">Mainframe Control</h2>
-                <div style="display: flex; gap: 10px;">
-                    <div class="stat-badge">DB_SYNC: <b>OK</b></div>
-                    <div class="stat-badge">VER: <b>4.0.1</b></div>
-                </div>
-            </div>
-
-            <div class="dashboard-grid">
-                <div>
-                    <div class="panel">
-                        <div class="panel-header">
-                            <h3>Duck Calibration Unit</h3>
-                            <span style="font-family: monospace;">HITS: <b id="score" style="color: var(--gold);">0</b></span>
-                        </div>
-                        <div id="gameArea">
-                            <div class="duck-target" id="duck" onclick="moveDuck()">🦆</div>
-                        </div>
+        <div class="dashboard-grid">
+            <div class="left-col">
+                <div class="panel">
+                    <div class="panel-header">
+                        <h3>Duck Calibration Unit</h3>
+                        <span style="font-family: monospace;">HITS: <b id="score" style="color: var(--gold);">0</b></span>
                     </div>
-
-                    <div class="panel">
-                        <div class="panel-header"><h3>Log Output</h3></div>
-                        <div class="console" id="console">
-                            <div><span class="time">[11:10:00]</span> Kernel Authenticated. Welcome, LuckyDuck.</div>
-                        </div>
+                    <div id="gameArea">
+                        <div class="duck-target" id="duck" onclick="moveDuck()">🦆</div>
                     </div>
                 </div>
 
-                <div>
-                    <div class="panel" style="border-left: 4px solid var(--blue-accent);">
-                        <div class="panel-header"><h3>Dogs Section</h3></div>
-                        <p style="font-size: 0.85rem;"><b>Luna & Ryder</b> detected in proximity.</p>
-                        <button onclick="logMsg('Dispensed treats to Luna & Ryder.')" style="width:100%; padding: 10px; background: var(--blue-accent); border: none; border-radius: 5px; color: white; cursor: pointer; font-weight: bold;">GIVE TREAT</button>
-                    </div>
-
-                    <div class="panel">
-                        <div class="panel-header"><h3>Change History</h3></div>
-                        <div style="font-size: 0.75rem; color: var(--accent);">Just Now</div>
-                        <div style="font-size: 0.8rem; color: var(--text-sub); margin-bottom: 10px;">Implemented login security & Scratch integration.</div>
-                        <div style="font-size: 0.75rem; color: var(--accent);">1h ago</div>
-                        <div style="font-size: 0.8rem; color: var(--text-sub);">Optimized CSS for Dashboard layout.</div>
+                <div class="panel">
+                    <div class="panel-header"><h3>Log Output</h3></div>
+                    <div class="console" id="console">
+                        <div><span class="time">[11:14:00]</span> Dashboard initialized...</div>
+                        <div><span class="time">[11:14:01]</span> Links verified: Scratch, GitHub, Projects.</div>
                     </div>
                 </div>
             </div>
-        </main>
-    </div>
+
+            <div class="right-col">
+                <div class="panel" style="border-left: 4px solid var(--blue-accent);">
+                    <div class="panel-header"><h3>Companions</h3></div>
+                    <p style="font-size: 0.85rem;"><b>Luna & Ryder</b> monitoring active session.</p>
+                    <button onclick="logMsg('Manual treat deployment successful.')" style="width:100%; padding: 10px; background: var(--blue-accent); border: none; border-radius: 5px; color: white; cursor: pointer; font-weight: bold;">GIVE TREAT</button>
+                </div>
+
+                <div class="panel">
+                    <div class="panel-header"><h3>Active Branches</h3></div>
+                    <a href="https://luckyduck883.github.io/Cha0sCraft/" class="project-link"><span>Cha0sCraft</span> <i class="fas fa-external-link-alt"></i></a>
+                    <a href="https://luckyduck883.github.io/BioRoll/" class="project-link"><span>BioRoll</span> <i class="fas fa-external-link-alt"></i></a>
+                </div>
+
+                <div class="panel">
+                    <div class="panel-header"><h3>Changelog</h3></div>
+                    <div style="font-size: 0.75rem; color: var(--accent); margin-bottom: 2px;">Just Now</div>
+                    <div style="font-size: 0.8rem; color: var(--text-sub); margin-bottom: 12px;">Removed security gateway for instant access.</div>
+                    <div style="font-size: 0.75rem; color: var(--accent); margin-bottom: 2px;">15m ago</div>
+                    <div style="font-size: 0.8rem; color: var(--text-sub);">Integrated Scratch profile link.</div>
+                </div>
+            </div>
+        </div>
+    </main>
 
     <script>
-        // Password logic (Set your password here!)
-        function checkPass() {
-            const pass = document.getElementById('passInput').value;
-            if (pass === "lucky") { // Change "lucky" to whatever you want
-                document.getElementById('loginOverlay').style.opacity = '0';
-                setTimeout(() => {
-                    document.getElementById('loginOverlay').style.display = 'none';
-                    document.getElementById('mainApp').style.display = 'flex';
-                    logMsg("Dashboard loaded successfully.");
-                }, 500);
-            } else {
-                const err = document.getElementById('loginError');
-                err.innerText = "INVALID ACCESS KEY";
-                err.style.opacity = "1";
-            }
-        }
-
         function logMsg(msg) {
             const box = document.getElementById('console');
             const time = new Date().toLocaleTimeString([], { hour12: false });
@@ -233,8 +184,8 @@
         function moveDuck() {
             const duck = document.getElementById('duck');
             const area = document.getElementById('gameArea');
-            const x = Math.random() * (area.clientWidth - 60);
-            const y = Math.random() * (area.clientHeight - 60);
+            const x = Math.random() * (area.clientWidth - 80);
+            const y = Math.random() * (area.clientHeight - 80);
             duck.style.left = x + 'px';
             duck.style.top = y + 'px';
             duck.style.transform = 'none';
