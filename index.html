@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DucksWeb</title>
+    <title>DucksWeb | Dev Portal</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root {
@@ -12,20 +12,9 @@
             --card-bg: #2d2d2d;
             --text-main: white;
             --text-sub: #888;
-            --accent: #55FF55; /* Back to Green */
-            --secondary-accent: #ffcc00; /* Back to Gold */
+            --accent: #55FF55; /* Green */
+            --secondary-accent: #ffcc00; /* Gold */
             --border: #444;
-        }
-
-        [data-theme="light"] {
-            --bg-color: #f0f2f5;
-            --container-bg: #ffffff;
-            --card-bg: #fdfdfd;
-            --text-main: #1a1a1a;
-            --text-sub: #555;
-            --accent: #2e7d32;
-            --secondary-accent: #f57c00;
-            --border: #ddd;
         }
 
         body {
@@ -33,187 +22,178 @@
             background-color: var(--bg-color);
             color: var(--text-main);
             text-align: center;
-            padding: 50px 20px;
-            transition: 0.3s;
+            padding: 40px 20px;
         }
 
-        .container { max-width: 800px; margin: auto; position: relative; }
+        .container { max-width: 850px; margin: auto; }
 
-        .theme-toggle {
-            position: absolute; top: -40px; right: 0;
-            background: var(--container-bg);
-            border: 1px solid var(--border);
-            color: var(--accent);
-            padding: 10px; border-radius: 50%; cursor: pointer;
-        }
+        h1 { color: var(--accent); font-size: 3.5rem; margin-bottom: 10px; text-shadow: 3px 3px #000; }
 
-        h1 { color: var(--accent); margin-bottom: 20px; text-shadow: 2px 2px rgba(0,0,0,0.2); font-size: 3.5rem; }
-
-        /* Teleporting Duck Game */
-        .clicker-box {
-            background: var(--card-bg);
-            padding: 25px;
-            border-radius: 15px;
+        /* Stats Dashboard */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
             margin-bottom: 30px;
-            border: 2px solid var(--secondary-accent);
+        }
+
+        .stat-card {
+            background: var(--container-bg);
+            padding: 15px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            border-top: 3px solid var(--accent);
+        }
+
+        .stat-card span { display: block; font-size: 0.8rem; color: var(--text-sub); text-transform: uppercase; }
+        .stat-card b { font-size: 1.2rem; color: var(--text-main); }
+
+        /* Changelog Styling */
+        .changelog {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 25px;
+            text-align: left;
+            border: 1px solid var(--border);
+            margin-bottom: 30px;
+        }
+
+        .changelog h3 { margin-top: 0; color: var(--secondary-accent); display: flex; align-items: center; gap: 10px; }
+        .log-item {
+            padding: 12px 0;
+            border-bottom: 1px solid #3d3d3d;
+        }
+        .log-item:last-child { border-bottom: none; }
+        .version-tag { 
+            background: var(--accent); 
+            color: #000; 
+            padding: 2px 8px; 
+            border-radius: 5px; 
+            font-size: 0.75rem; 
+            font-weight: bold; 
+            margin-right: 10px;
+        }
+        .log-text { font-size: 0.95rem; }
+        .log-date { float: right; color: var(--text-sub); font-size: 0.8rem; }
+
+        /* Mini Game Area */
+        .game-container {
+            background: var(--container-bg);
+            border-radius: 15px;
+            padding: 20px;
+            border: 2px solid var(--accent);
+            margin-bottom: 30px;
             position: relative;
             height: 250px;
             overflow: hidden;
         }
-        .score-container { display: flex; justify-content: space-around; position: relative; z-index: 10; pointer-events: none; }
-        .score-num { font-size: 1.5rem; color: var(--secondary-accent); font-weight: bold; display: block; }
-        
-        .duck-btn { 
-            font-size: 3.5rem; 
-            cursor: pointer; 
-            display: inline-block; 
+
+        .duck-target {
+            font-size: 3.5rem;
+            cursor: pointer;
             position: absolute;
-            top: 50%; left: 50%;
+            top: 50%;
+            left: 50%;
             transform: translate(-50%, -50%);
-            z-index: 5;
             user-select: none;
+            transition: 0.1s;
         }
 
-        /* Dog & Favorites Section */
-        .highlight-box {
-            background: var(--container-bg);
-            padding: 25px;
-            border-radius: 20px;
+        /* Dog Section */
+        .dog-shoutout {
+            background: #1e2530;
+            padding: 20px;
+            border-radius: 15px;
             margin-bottom: 30px;
-            border-left: 5px solid var(--accent);
+            border-left: 5px solid #58a6ff; /* Blue touch for your favorite color */
             text-align: left;
         }
 
-        .favorites-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 15px;
-            margin-bottom: 40px;
-        }
-        .fav-card {
-            background: var(--card-bg);
-            padding: 15px;
-            border-radius: 12px;
-            border: 1px solid var(--border);
-        }
-        .fav-card i { font-size: 1.5rem; color: var(--secondary-accent); margin-bottom: 5px; }
-
-        .fact-box {
-            background: var(--container-bg);
-            padding: 15px; border-radius: 15px; border: 1px solid var(--border); margin-bottom: 30px;
-            display: flex; align-items: center; justify-content: space-between;
-        }
-        
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; margin-bottom: 40px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
         .card { background: var(--container-bg); padding: 20px; border-radius: 15px; border: 1px solid var(--border); text-decoration: none; color: var(--text-main); transition: 0.3s; }
-        .card:hover { border-color: var(--accent); transform: translateY(-3px); }
+        .card:hover { border-color: var(--accent); transform: translateY(-5px); }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn">
-            <i class="fas fa-moon"></i>
-        </button>
-
         <h1>LuckyDuck</h1>
+        
+        <div class="stats-grid">
+            <div class="stat-card"><span>Status</span><b>ONLINE</b></div>
+            <div class="stat-card"><span>Version</span><b>2.5.0</b></div>
+            <div class="stat-card"><span>Language</span><b>JS / HTML</b></div>
+            <div class="stat-card"><span>Theme</span><b>Green/Gold</b></div>
+        </div>
 
-        <div class="clicker-box" id="gameArea">
-            <div class="score-container">
-                <div><span style="color: var(--text-sub)">Clicks</span><span class="score-num" id="clickCount">0</span></div>
-                <div><span style="color: var(--text-sub)">High Score</span><span class="score-num" id="highScore">1000</span></div>
+        <div class="changelog">
+            <h3><i class="fas fa-list-ul"></i> Website Changelog</h3>
+            
+            <div class="log-item">
+                <span class="log-date">Feb 6, 2026</span>
+                <span class="version-tag">v2.5.0</span>
+                <span class="log-text">Removed inventory bar. Added stats dashboard and development log.</span>
             </div>
-            <div class="duck-btn" id="duck" onclick="clickDuck()">🦆</div>
-        </div>
 
-        <div class="highlight-box">
-            <h3 style="margin-top:0; color: var(--accent);"><i class="fas fa-dog"></i> Luna & Ryder</h3>
-            <p style="margin-bottom:0;">Shoutout to my dogs, Luna and Ryder! They're the best companions while I'm chilling or working on new code.</p>
-        </div>
-
-        <h2 style="color: var(--accent); text-align: left;">The Favorites</h2>
-        <div class="favorites-grid">
-            <div class="fav-card"><i class="fas fa-tint" style="color: #58a6ff;"></i><p>Color Blue</p></div>
-            <div class="fav-card"><i class="fas fa-cube"></i><p>Minecraft</p></div>
-            <div class="fav-card"><i class="fas fa-code"></i><p>Coding</p></div>
-            <div class="fav-card"><i class="fas fa-coffee"></i><p>Chilling</p></div>
-        </div>
-
-        <div class="fact-box">
-            <div style="display: flex; align-items: center; gap: 15px; text-align: left;">
-                <i class="fas fa-feather-alt" style="color: var(--secondary-accent);"></i>
-                <span id="duckFact">Loading duck facts...</span>
+            <div class="log-item">
+                <span class="log-date">Feb 5, 2026</span>
+                <span class="version-tag">v2.4.0</span>
+                <span class="log-text">Added Minecraft inventory bar and Luna & Ryder treat system.</span>
             </div>
-            <button onclick="setFact()" style="background:none; border:none; color:var(--text-sub); cursor:pointer;"><i class="fas fa-sync-alt"></i></button>
+
+            <div class="log-item">
+                <span class="log-date">Feb 3, 2026</span>
+                <span class="version-tag">v2.0.0</span>
+                <span class="log-text">Implemented teleporting duck logic and high-score tracking.</span>
+            </div>
         </div>
 
-        <h2 style="color: var(--accent); text-align: left;">Projects</h2>
+        <div class="game-container" id="gameArea">
+            <div style="display: flex; justify-content: space-around; font-weight: bold; color: var(--secondary-accent);">
+                <span>CLICKS: <span id="score">0</span></span>
+                <span>RECORD: 1000</span>
+            </div>
+            <div class="duck-target" id="duck" onclick="moveDuck()">🦆</div>
+        </div>
+
+        <div class="dog-shoutout">
+            <h3 style="margin:0; color: #58a6ff;"><i class="fas fa-dog"></i> Luna & Ryder</h3>
+            <p>The real owners of this website. Currently chilling while I code and play Minecraft.</p>
+        </div>
+
+        <h2 style="color: var(--accent); text-align: left;">Main Projects</h2>
         <div class="grid">
             <a href="https://luckyduck883.github.io/ImaSayDucks/" class="card"><h3>🦆 ImaSayDucks</h3></a>
             <a href="https://luckyduck883.github.io/Cha0sCraft/" class="card"><h3>⚔️ Cha0sCraft</h3></a>
             <a href="https://luckyduck883.github.io/BioRoll/" class="card"><h3>🎲 BioRoll</h3></a>
         </div>
 
-        <div style="display: flex; justify-content: center; gap: 40px; margin-top: 50px;">
-            <a href="https://github.com/luckyduck883" style="color: var(--text-sub); font-size: 2rem;"><i class="fab fa-github"></i></a>
-            <a href="https://scratch.mit.edu/users/DANUGGET21/" style="color: var(--text-sub); font-size: 2rem;"><i class="fas fa-cat"></i></a>
+        <div style="margin-top: 50px;">
+            <a href="https://github.com/luckyduck883" style="color: var(--text-sub); margin: 0 20px; font-size: 2rem;"><i class="fab fa-github"></i></a>
+            <a href="https://scratch.mit.edu/users/DANUGGET21/" style="color: var(--text-sub); margin: 0 20px; font-size: 2rem;"><i class="fas fa-cat"></i></a>
+            <p style="color: #444; margin-top: 20px;">© 2026 LuckyDuck Development</p>
         </div>
-        <p style="margin-top: 20px; font-size: 0.9rem; color: #555;">2026 LuckyDuck | 🦴 Luna & Ryder approved</p>
     </div>
 
     <script>
-        let myBest = 1000; 
-        let currentClicks = 0;
-
-        function clickDuck() {
-            currentClicks++;
-            document.getElementById('clickCount').innerText = currentClicks;
-
+        let clicks = 0;
+        function moveDuck() {
+            clicks++;
+            document.getElementById('score').innerText = clicks;
+            
             const duck = document.getElementById('duck');
             const area = document.getElementById('gameArea');
             
-            // Random movement math
             const maxX = area.clientWidth - 80;
-            const maxY = area.clientHeight - 80; 
-            const randomX = Math.floor(Math.random() * maxX) + 10;
-            const randomY = Math.floor(Math.random() * maxY) + 30;
-
-            duck.style.left = randomX + 'px';
-            duck.style.top = randomY + 'px';
+            const maxY = area.clientHeight - 80;
+            
+            const x = Math.floor(Math.random() * maxX) + 10;
+            const y = Math.floor(Math.random() * maxY) + 30;
+            
+            duck.style.left = x + 'px';
+            duck.style.top = y + 'px';
             duck.style.transform = 'none';
-
-            if (currentClicks > myBest) {
-                document.getElementById('highScore').innerText = currentClicks;
-                document.getElementById('highScore').style.color = "#55FF55";
-            }
         }
-
-        const facts = [
-            "Ducks have highly waterproof feathers thanks to a special oil gland.",
-            "A group of ducks is called a 'raft' when they are on water!",
-            "Most ducks have a 360-degree field of vision.",
-            "Ducks can sleep with one eye open to stay alert for predators!",
-            "Ducks can fly as fast as 60 miles per hour!",
-            "Ducklings can walk and swim almost immediately after hatching."
-        ];
-
-        function setFact() {
-            document.getElementById('duckFact').innerText = facts[Math.floor(Math.random() * facts.length)];
-        }
-
-        function toggleTheme() {
-            const body = document.body;
-            const icon = document.getElementById('themeBtn').querySelector('i');
-            if (body.hasAttribute('data-theme')) {
-                body.removeAttribute('data-theme');
-                icon.className = 'fas fa-moon';
-            } else {
-                body.setAttribute('data-theme', 'light');
-                icon.className = 'fas fa-sun';
-            }
-        }
-
-        window.onload = setFact;
     </script>
 </body>
 </html>
