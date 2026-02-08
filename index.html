@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DucksWebb</title>
+    <title>Lucky Ducks | Dev Hub</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root {
@@ -40,7 +40,6 @@
 
         .nav-logo { font-weight: bold; color: var(--blue-accent); font-size: 1.2rem; margin-bottom: 30px; display: flex; align-items: center; gap: 10px; font-family: monospace; }
         
-        /* About Me Sidebar Section */
         .about-sidebar {
             background: rgba(0,0,0,0.2);
             border: 1px solid var(--border);
@@ -49,8 +48,7 @@
             margin-bottom: 25px;
         }
         .about-sidebar h4 { margin: 0 0 10px 0; font-size: 0.7rem; color: var(--blue-accent); text-transform: uppercase; letter-spacing: 1px; }
-        .about-sidebar p { font-size: 0.8rem; line-height: 1.4; margin: 0 0 10px 0; color: #a1b0c0; }
-        .dog-pill { display: flex; align-items: center; gap: 8px; font-size: 0.75rem; color: var(--text-main); margin-bottom: 5px; }
+        .about-sidebar p { font-size: 0.8rem; line-height: 1.4; margin: 0; color: #a1b0c0; }
 
         .nav-link { 
             color: var(--text-main); text-decoration: none; padding: 10px; border-radius: 6px; margin-bottom: 5px; 
@@ -62,16 +60,19 @@
         main { flex-grow: 1; padding: 30px; overflow-y: auto; background: radial-gradient(circle at top right, #0a1f35, #050a0f); }
         .header-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; border-bottom: 1px solid var(--border); padding-bottom: 15px; }
 
-        .dashboard-grid { display: grid; grid-template-columns: 1.6fr 1.4fr; gap: 25px; }
-        .panel { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 20px; margin-bottom: 25px; }
-        .panel-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; color: var(--accent); font-size: 0.75rem; text-transform: uppercase; }
+        .dashboard-grid { display: grid; grid-template-columns: 1fr; gap: 25px; }
+        .panel { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 25px; margin-bottom: 25px; }
+        .panel-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; color: var(--blue-accent); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1.5px; border-bottom: 1px solid var(--border); padding-bottom: 10px;}
 
-        .project-item { background: rgba(0,0,0,0.2); border-radius: 8px; padding: 15px; margin-bottom: 15px; border-left: 3px solid var(--blue-accent); }
-        .project-title { font-weight: bold; color: var(--text-main); margin-bottom: 5px; display: block; }
-        .project-text { font-size: 0.8rem; color: #a1b0c0; line-height: 1.5; }
-
-        .art-preview { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
-        .art-box { background: #050a0f; border: 1px solid var(--border); aspect-ratio: 4/3; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; color: #586069; }
+        /* Subdomain Table */
+        .subdomain-table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        .subdomain-table th { text-align: left; font-size: 0.7rem; color: #586069; padding: 10px; text-transform: uppercase; }
+        .subdomain-table td { padding: 20px 10px; border-bottom: 1px solid var(--border); vertical-align: top; }
+        
+        .status-badge { font-size: 0.65rem; padding: 2px 8px; border-radius: 4px; font-weight: bold; text-transform: uppercase; }
+        .path-text { font-family: 'JetBrains Mono', monospace; color: var(--blue-accent); font-size: 0.85rem; }
+        .desc-text { font-size: 0.8rem; color: #a1b0c0; margin-top: 5px; line-height: 1.4; display: block; }
+        .module-tag { font-size: 0.6rem; color: var(--accent); background: rgba(85, 255, 85, 0.1); padding: 2px 6px; border-radius: 4px; margin-top: 8px; display: inline-block; border: 1px solid rgba(85, 255, 85, 0.2); }
     </style>
 </head>
 <body>
@@ -80,75 +81,15 @@
         <div class="nav-logo"><i class="fas fa-terminal"></i> Lucky Ducks</div>
 
         <div class="about-sidebar">
-            <h4><i class="fas fa-user-circle"></i> Developer Profile</h4>
-            <p>I love <b>Ducks</b>, sketching comics, and coding game engines. Currently building a site to post my art and develop my games further.</p>
-            <div class="dog-pill"><i class="fas fa-dog" style="color:var(--blue-accent)"></i> Luna (Security)</div>
-            <div class="dog-pill"><i class="fas fa-dog" style="color:var(--blue-accent)"></i> Ryder (Morale)</div>
+            <h4><i class="fas fa-user-circle"></i> About Me</h4>
+            <p>I love <b>Ducks</b>, sketching comics, and my dogs <b>Luna & Ryder</b>. This site is my hub for game development and posting my art.</p>
         </div>
         
-        <a href="#" class="nav-link"><span><i class="fas fa-layer-group"></i> Dashboard</span></a>
+        <a href="#" class="nav-link"><span><i class="fas fa-id-card"></i> Dev Portfolio</span></a>
         <a href="https://github.com/luckyduck883" target="_blank" class="nav-link"><span><i class="fab fa-github"></i> Repositories</span></a>
         <a href="https://scratch.mit.edu/users/DANUGGET21/" target="_blank" class="nav-link"><span><i class="fas fa-code"></i> Scratch</span></a>
-        
-        <div style="margin-top: 20px; padding-top: 15px; border-top: 1px solid var(--border);">
-            <p style="font-size: 0.6rem; color: #586069; margin-bottom: 10px; letter-spacing: 1px;">DOMAINS</p>
-            <a href="https://luckyduck883.github.io/ImaSayDucks/" class="nav-link"><span>/imasayducks</span></a>
-            <a href="https://luckyduck883.github.io/Cha0sCraft/" class="nav-link"><span>/cha0scraft</span></a>
-            <a href="https://luckyduck883.github.io/BioRoll/" class="nav-link"><span>/bioroll</span></a>
-        </div>
     </nav>
 
     <main>
         <div class="header-bar">
-            <h2 style="font-size: 1.1rem; font-weight: 500; color: var(--blue-accent);">Central Hub / src / portfolio</h2>
-            <div style="font-size: 0.7rem; font-family: monospace; color: var(--accent);">STABLE_BUILD_5.5</div>
-        </div>
-
-        <div class="dashboard-grid">
-            <div class="left-col">
-                <div class="panel">
-                    <div class="panel-header">Development Specs</div>
-                    
-                    <div class="project-item">
-                        <span class="project-title">ImaSayDucks</span>
-                        <p class="project-text">A unique duck-based exploration RPG. Features custom world-traversal logic and creature-interaction systems inspired by classic monster-collectors.</p>
-                    </div>
-
-                    <div class="project-item">
-                        <span class="project-title">Cha0sCraft</span>
-                        <p class="project-text">Economic resource simulator. Logic focuses on object collection, state management, and currency scaling.</p>
-                    </div>
-
-                    <div class="project-item">
-                        <span class="project-title">BioRoll</span>
-                        <p class="project-text">RNG Engine designed to simulate and test high-frequency probability distributions and algorithmic luck.</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="right-col">
-                <div class="panel">
-                    <div class="panel-header">Sketchbook & Comics</div>
-                    <p style="font-size: 0.8rem; color: #8b949e; margin-bottom: 15px;">Development art and character concepts for hosted projects.</p>
-                    <div class="art-preview">
-                        <div class="art-box"><i class="fas fa-pen-nib"></i></div>
-                        <div class="art-box"><i class="fas fa-book-open"></i></div>
-                        <div class="art-box"><i class="fas fa-palette"></i></div>
-                        <div class="art-box"><i class="fas fa-pencil-alt"></i></div>
-                    </div>
-                </div>
-
-                <div class="panel">
-                    <div class="panel-header">Tech Stack</div>
-                    <div style="display: flex; flex-wrap: wrap; gap: 8px;">
-                        <span style="font-size: 0.65rem; padding: 4px 8px; border: 1px solid var(--border); border-radius: 4px; color: var(--blue-accent);">JavaScript</span>
-                        <span style="font-size: 0.65rem; padding: 4px 8px; border: 1px solid var(--border); border-radius: 4px; color: var(--blue-accent);">Digital Art</span>
-                        <span style="font-size: 0.65rem; padding: 4px 8px; border: 1px solid var(--border); border-radius: 4px; color: var(--blue-accent);">RNG Logic</span>
-                        <span style="font-size: 0.65rem; padding: 4px 8px; border: 1px solid var(--border); border-radius: 4px; color: var(--blue-accent);">Game Arch</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </main>
-</body>
-</html>
+            <h2 style="font-size: 1.1rem;
