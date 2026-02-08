@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lucky Ducks | Software Portfolio</title>
+    <title>Lucky Ducks | Software Engineering Portfolio</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root {
@@ -46,8 +46,9 @@
         .nav-link:hover { background: var(--card-bg); color: var(--accent); }
         .tag { font-size: 0.6rem; padding: 2px 6px; border-radius: 4px; font-weight: bold; border: 1px solid; opacity: 0.8; }
 
-        /* Main Content */
+        /* Main Workspace */
         main { flex-grow: 1; padding: 30px; overflow-y: auto; background: radial-gradient(circle at top right, #10141b, #080a0d); }
+        
         .header-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; border-bottom: 1px solid var(--border); padding-bottom: 15px; }
 
         .dashboard-grid { display: grid; grid-template-columns: 1.8fr 1.2fr; gap: 25px; }
@@ -55,119 +56,122 @@
         .panel-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; }
         .panel-header h3 { margin: 0; font-size: 0.75rem; color: var(--accent); text-transform: uppercase; letter-spacing: 1.5px; }
 
-        /* Subdomain Management Table */
-        .domain-list { width: 100%; border-collapse: collapse; margin-top: 10px; }
-        .domain-list th { text-align: left; font-size: 0.7rem; color: #586069; padding: 8px; border-bottom: 1px solid var(--border); }
-        .domain-list td { padding: 12px 8px; font-size: 0.85rem; border-bottom: 1px solid #21262d; }
-        .domain-link { color: var(--blue-accent); text-decoration: none; font-family: monospace; }
-        .domain-link:hover { text-decoration: underline; }
+        /* Nested Subdomain Table */
+        .subdomain-table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        .subdomain-table th { text-align: left; font-size: 0.7rem; color: #586069; padding: 10px; border-bottom: 1px solid var(--border); text-transform: uppercase; }
+        .subdomain-table td { padding: 15px 10px; font-size: 0.85rem; border-bottom: 1px solid #21262d; }
+        .nested-path { color: var(--blue-accent); font-family: monospace; font-weight: bold; }
+        
+        .status-pill { padding: 2px 8px; border-radius: 12px; font-size: 0.65rem; font-weight: bold; }
 
-        /* Stats & Logs */
-        .console-box { background: #010409; font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: #586069; height: 150px; overflow-y: auto; padding: 10px; border-radius: 6px; border: 1px solid var(--border); }
-        .grid-graph { display: flex; gap: 3px; }
-        .column { display: grid; grid-template-rows: repeat(7, 10px); gap: 3px; }
-        .cube { width: 10px; height: 10px; background: #21262d; border-radius: 2px; }
-        .cube.active { background: #26a641; }
+        /* Console */
+        .console-box { background: #010409; font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: #586069; height: 160px; overflow-y: auto; padding: 10px; border-radius: 6px; border: 1px solid var(--border); }
     </style>
 </head>
 <body>
 
     <nav>
-        <div class="nav-logo"><i class="fas fa-network-wired"></i> Lucky Ducks</div>
+        <div class="nav-logo">
+            <i class="fas fa-code-merge"></i> Lucky Ducks
+        </div>
         
-        <a href="#" class="nav-link"><span><i class="fas fa-home"></i> Portfolio Home</span></a>
+        <a href="#" class="nav-link"><span><i class="fas fa-briefcase"></i> Dev Portfolio</span></a>
         <a href="https://github.com/luckyduck883" target="_blank" class="nav-link"><span><i class="fab fa-github"></i> GitHub Repos</span></a>
-        <a href="https://scratch.mit.edu/users/DANUGGET21/" target="_blank" class="nav-link"><span><i class="fas fa-code"></i> Scratch</span></a>
+        <a href="https://scratch.mit.edu/users/DANUGGET21/" target="_blank" class="nav-link"><span><i class="fas fa-terminal"></i> Scratch</span></a>
         
         <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid var(--border);">
-            <p style="font-size: 0.65rem; color: #586069; margin-bottom: 15px; letter-spacing: 1px;">ACTIVE SUBDOMAINS</p>
-            <a href="https://luckyduck883.github.io/ImaSayDucks/" class="nav-link"><span>ImaSayDucks</span> <span class="tag" style="border-color:var(--accent); color:var(--accent)">STABLE</span></a>
-            <a href="https://luckyduck883.github.io/Cha0sCraft/" class="nav-link"><span>Cha0sCraft</span> <span class="tag" style="border-color:var(--gold); color:var(--gold)">DEV</span></a>
-            <a href="https://luckyduck883.github.io/BioRoll/" class="nav-link"><span>BioRoll</span> <span class="tag" style="border-color:var(--blue-accent); color:var(--blue-accent)">BETA</span></a>
+            <p style="font-size: 0.65rem; color: #586069; margin-bottom: 15px; letter-spacing: 1px;">SUBDOMAIN STRUCTURE</p>
+            <a href="https://luckyduck883.github.io/ImaSayDucks/" class="nav-link"><span>/imasayducks</span> <span class="tag" style="border-color:var(--accent); color:var(--accent)">PROD</span></a>
+            <a href="https://luckyduck883.github.io/Cha0sCraft/" class="nav-link"><span>/cha0scraft</span> <span class="tag" style="border-color:var(--gold); color:var(--gold)">DEV</span></a>
+            <a href="https://luckyduck883.github.io/BioRoll/" class="nav-link"><span>/bioroll</span> <span class="tag" style="border-color:var(--blue-accent); color:var(--blue-accent)">BETA</span></a>
         </div>
 
         <div style="margin-top: auto; font-family: monospace; font-size: 0.7rem; color: #586069;">
-            <div>NETWORK: <span style="color: var(--accent);">ENCRYPTED</span></div>
-            <div>UPTIME: <span id="uptime-clock">00:00:00</span></div>
+            <div>ROOT_DOMAIN: <span style="color: var(--accent);">VERIFIED</span></div>
+            <div>BUILD_VER: 5.0.0</div>
         </div>
     </nav>
 
     <main>
         <div class="header-bar">
-            <h2 style="font-size: 1.1rem; font-weight: 500;">Software Engineering Portfolio</h2>
-            <div style="display: flex; gap: 10px;">
-                <span class="tag" style="border-color: var(--border); color: var(--text-main);">Personal Site v5.0</span>
+            <h2 style="font-size: 1.1rem; font-weight: 500;">Software Development Portfolio</h2>
+            <div style="display: flex; gap: 15px;">
+                <span style="font-size: 0.7rem; font-family: monospace; color: var(--accent);">● SYSTEM_ONLINE</span>
+                <span style="font-size: 0.7rem; font-family: monospace; color: #586069;">UPTIME: <span id="uptime">00:00:00</span></span>
             </div>
         </div>
 
         <div class="dashboard-grid">
             <div class="left-col">
                 <div class="panel">
-                    <div class="panel-header"><h3>Domain Management & Routing</h3></div>
-                    <table class="domain-list">
+                    <div class="panel-header"><h3>Nested Subdomain Directory</h3></div>
+                    <table class="subdomain-table">
                         <thead>
                             <tr>
-                                <th>SUBDOMAIN</th>
-                                <th>ROOT PATH</th>
-                                <th>STATUS</th>
+                                <th>Project Name</th>
+                                <th>Subdomain Path</th>
+                                <th>Type</th>
+                                <th>Status</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td><a href="https://luckyduck883.github.io/ImaSayDucks/" class="domain-link">imasayducks/</a></td>
-                                <td>main/production</td>
-                                <td><span style="color:var(--accent)">● Online</span></td>
+                                <td>ImaSayDucks</td>
+                                <td class="nested-path">luckyduck883.github.io/ImaSayDucks/</td>
+                                <td>Web App</td>
+                                <td><span class="status-pill" style="background: rgba(85, 255, 85, 0.1); color: var(--accent);">Production</span></td>
                             </tr>
                             <tr>
-                                <td><a href="https://luckyduck883.github.io/Cha0sCraft/" class="domain-link">cha0scraft/</a></td>
-                                <td>dev/staging</td>
-                                <td><span style="color:var(--gold)">● Building</span></td>
+                                <td>Cha0sCraft</td>
+                                <td class="nested-path">luckyduck883.github.io/Cha0sCraft/</td>
+                                <td>Software Build</td>
+                                <td><span class="status-pill" style="background: rgba(255, 204, 0, 0.1); color: var(--gold);">Development</span></td>
                             </tr>
                             <tr>
-                                <td><a href="https://luckyduck883.github.io/BioRoll/" class="domain-link">bioroll/</a></td>
-                                <td>beta/testing</td>
-                                <td><span style="color:var(--blue-accent)">● Testing</span></td>
+                                <td>BioRoll</td>
+                                <td class="nested-path">luckyduck883.github.io/BioRoll/</td>
+                                <td>Logic Engine</td>
+                                <td><span class="status-pill" style="background: rgba(88, 166, 255, 0.1); color: var(--blue-accent);">Beta</span></td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
 
                 <div class="panel">
-                    <div class="panel-header"><h3>Architecture Metrics</h3></div>
-                    <div style="display: flex; align-items: center; gap: 20px;">
-                        <div class="grid-graph" id="contribution-graph"></div>
-                        <div style="font-size: 0.75rem;">
-                            <b style="color: var(--accent);">Active Repository Sync</b><br>
-                            <span style="color: #8b949e;">Monitoring 3 subdomains across global CDN</span>
-                        </div>
+                    <div class="panel-header"><h3>Technical Documentation</h3></div>
+                    <div style="font-size: 0.85rem; color: #8b949e; line-height: 1.6;">
+                        <p>This personal site functions as the primary hub for all **Lucky Ducks** software development. It utilizes a nested subdomain architecture to separate production-ready web applications from experimental builds and logic engines.</p>
+                        <ul style="padding-left: 20px; color: var(--text-main);">
+                            <li>Automated routing for 3 distinct software projects.</li>
+                            <li>Version-controlled repository mapping via GitHub.</li>
+                            <li>Live deployment monitoring and environment staging.</li>
+                        </ul>
                     </div>
                 </div>
             </div>
 
             <div class="right-col">
                 <div class="panel" style="border-top: 2px solid var(--accent);">
-                    <div class="panel-header"><h3>Personal Site Metadata</h3></div>
-                    <p style="font-size: 0.8rem; line-height: 1.6;">
-                        Centralized hub for **Lucky Ducks** software projects. This site provides directory routing for nested subdomains and documentation for ongoing web developments.
+                    <div class="panel-header"><h3>Developer Profile</h3></div>
+                    <p style="font-size: 0.8rem; color: #8b949e; margin-bottom: 20px;">
+                        Specializing in JavaScript-based software architecture and modular web systems.
                     </p>
-                </div>
-
-                <div class="panel">
-                    <div class="panel-header"><h3>Traffic & Runtime Logs</h3></div>
-                    <div class="console-box" id="console-logs">
-                        <div>[13:30:01] Portfolio Routing Table loaded.</div>
-                        <div>[13:30:05] Verifying subdomain SSL certs...</div>
-                        <div>[13:30:08] All domains operational.</div>
+                    <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+                        <span class="tag" style="border-color: #30363d; background: #0d1117;">Full-Stack</span>
+                        <span class="tag" style="border-color: #30363d; background: #0d1117;">Vanilla JS</span>
+                        <span class="tag" style="border-color: #30363d; background: #0d1117;">CSS Grid</span>
+                        <span class="tag" style="border-color: #30363d; background: #0d1117;">Git Workflow</span>
                     </div>
                 </div>
 
                 <div class="panel">
-                    <div class="panel-header"><h3>Engineering Stack</h3></div>
-                    <div style="display: flex; flex-wrap: wrap; gap: 8px;">
-                        <span class="tag" style="border-color: #30363d; background: #0d1117;">JavaScript</span>
-                        <span class="tag" style="border-color: #30363d; background: #0d1117;">HTML/CSS</span>
-                        <span class="tag" style="border-color: #30363d; background: #0d1117;">Git Control</span>
-                        <span class="tag" style="border-color: #30363d; background: #0d1117;">Web Hosting</span>
+                    <div class="panel-header"><h3>Architecture Logs</h3></div>
+                    <div class="console-box" id="console-logs">
+                        <div>[13:45:01] Portfolio Shell Initialized.</div>
+                        <div>[13:45:02] Mapping nested subdomain: /ImaSayDucks</div>
+                        <div>[13:45:02] Mapping nested subdomain: /Cha0sCraft</div>
+                        <div>[13:45:03] Subdomain validation complete.</div>
+                        <div>[13:45:04] Status: All Repositories Synced.</div>
                     </div>
                 </div>
             </div>
@@ -175,22 +179,8 @@
     </main>
 
     <script>
-        // Generate contribution graph
-        const graph = document.getElementById('contribution-graph');
-        for(let i=0; i<18; i++) {
-            const col = document.createElement('div');
-            col.className = 'column';
-            for(let j=0; j<7; j++) {
-                const cube = document.createElement('div');
-                if(Math.random() > 0.6) cube.className = 'cube active';
-                else cube.className = 'cube';
-                col.appendChild(cube);
-            }
-            graph.appendChild(col);
-        }
-
         setInterval(() => {
-            document.getElementById('uptime-clock').innerText = new Date().toLocaleTimeString([], { hour12: false });
+            document.getElementById('uptime').innerText = new Date().toLocaleTimeString([], { hour12: false });
         }, 1000);
     </script>
 </body>
