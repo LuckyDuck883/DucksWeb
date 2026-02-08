@@ -19,7 +19,7 @@
 
         body, html {
             margin: 0; padding: 0;
-            font-family: 'Inter', sans-serif;
+            font-family: 'Inter', 'Segoe UI', sans-serif;
             background-color: var(--bg-dark);
             color: var(--text-main);
             height: 100vh;
@@ -27,9 +27,9 @@
             overflow: hidden;
         }
 
-        /* Sidebar Navigation */
+        /* Sidebar */
         nav {
-            width: 240px;
+            width: 260px;
             background: var(--sidebar-bg);
             border-right: 1px solid var(--border);
             display: flex;
@@ -38,136 +38,115 @@
         }
 
         .nav-logo { font-weight: bold; color: var(--accent); font-size: 1.4rem; margin-bottom: 30px; display: flex; align-items: center; gap: 10px; }
-        .nav-link { color: var(--text-main); text-decoration: none; padding: 12px; border-radius: 8px; margin-bottom: 5px; transition: 0.2s; display: flex; align-items: center; gap: 10px; font-size: 0.9rem; }
+        .nav-link { 
+            color: var(--text-main); text-decoration: none; padding: 12px; border-radius: 8px; margin-bottom: 5px; 
+            transition: 0.2s; display: flex; align-items: center; justify-content: space-between; font-size: 0.9rem; 
+        }
         .nav-link:hover, .nav-link.active { background: var(--card-bg); color: var(--accent); }
+        .tag { font-size: 0.6rem; padding: 2px 6px; border-radius: 4px; font-weight: bold; text-transform: uppercase; border: 1px solid; }
 
         /* Main Content */
         main { flex-grow: 1; padding: 30px; overflow-y: auto; }
+        header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; }
 
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 25px;
-        }
-
-        .dashboard-grid {
-            display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 20px;
-        }
-
-        .panel {
-            background: var(--sidebar-bg);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 20px;
-        }
-
+        .dashboard-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 20px; }
+        .panel { background: var(--sidebar-bg); border: 1px solid var(--border); border-radius: 12px; padding: 20px; margin-bottom: 20px; }
         .panel-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; border-bottom: 1px solid var(--border); padding-bottom: 10px; }
         .panel-header h3 { margin: 0; font-size: 0.8rem; color: var(--accent); text-transform: uppercase; letter-spacing: 1px; }
 
-        /* Game & Console */
-        #gameArea { height: 250px; position: relative; background: #000; border-radius: 8px; overflow: hidden; border: 1px solid #111; }
-        .duck-target { font-size: 3rem; cursor: pointer; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); user-select: none; z-index: 5; }
+        /* Technical Skill Bars */
+        .skill-item { margin-bottom: 10px; }
+        .skill-info { display: flex; justify-content: space-between; font-size: 0.8rem; margin-bottom: 4px; }
+        .skill-bar { height: 6px; background: #000; border-radius: 3px; overflow: hidden; }
+        .skill-progress { height: 100%; background: var(--accent); }
 
-        .console {
-            background: #050505;
-            font-family: 'Courier New', monospace;
-            font-size: 0.8rem;
-            padding: 15px;
-            height: 140px;
-            overflow-y: auto;
-            color: #888;
-            border-radius: 8px;
-        }
-        .console span.time { color: var(--accent); margin-right: 10px; }
+        /* Game & Console */
+        #gameArea { height: 220px; position: relative; background: #000; border-radius: 8px; overflow: hidden; border: 1px solid #111; }
+        .duck-target { font-size: 3rem; cursor: pointer; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); user-select: none; }
+        .console { background: #050505; font-family: 'Courier New', monospace; font-size: 0.75rem; padding: 15px; height: 120px; overflow-y: auto; color: #888; border-radius: 8px; }
 
         .stat-badge { background: var(--card-bg); border: 1px solid var(--border); padding: 5px 12px; border-radius: 20px; font-size: 0.7rem; font-family: monospace; }
-        .stat-badge b { color: var(--accent); }
-
-        /* Links */
-        .project-link {
-            display: flex;
-            justify-content: space-between;
-            padding: 10px;
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            border-radius: 6px;
-            color: var(--text-main);
-            text-decoration: none;
-            margin-bottom: 8px;
-            font-size: 0.9rem;
-        }
-        .project-link:hover { border-color: var(--accent); }
-
     </style>
 </head>
 <body>
 
     <nav>
         <div class="nav-logo">🦆 LuckyDuck</div>
-        <a href="#" class="nav-link active"><i class="fas fa-terminal"></i> Dashboard</a>
-        <a href="https://scratch.mit.edu/users/DANUGGET21/" target="_blank" class="nav-link"><i class="fas fa-cat"></i> Scratch Profile</a>
-        <a href="https://luckyduck883.github.io/ImaSayDucks/" target="_blank" class="nav-link"><i class="fas fa-feather"></i> ImaSayDucks</a>
-        <a href="https://github.com/luckyduck883" target="_blank" class="nav-link"><i class="fab fa-github"></i> GitHub Main</a>
+        <a href="#" class="nav-link active"><span><i class="fas fa-code"></i> Portfolio</span> <span class="tag" style="color:#55FF55">Live</span></a>
+        <a href="https://scratch.mit.edu/users/DANUGGET21/" target="_blank" class="nav-link"><span><i class="fas fa-cat"></i> Scratch</span></a>
+        <a href="https://github.com/luckyduck883" target="_blank" class="nav-link"><span><i class="fab fa-github"></i> GitHub</span></a>
         
+        <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--border);">
+            <p style="font-size: 0.7rem; color: var(--text-sub); margin-bottom: 10px;">SUBDOMAIN REPOS</p>
+            <a href="https://luckyduck883.github.io/ImaSayDucks/" class="nav-link"><span>ImaSayDucks</span> <span class="tag" style="color:var(--blue-accent)">v2.1</span></a>
+            <a href="https://luckyduck883.github.io/Cha0sCraft/" class="nav-link"><span>Cha0sCraft</span> <span class="tag" style="color:var(--gold)">DEV</span></a>
+        </div>
+
         <div style="margin-top: auto; font-family: monospace; font-size: 0.7rem;">
-            <div style="color: var(--accent);">SYS_TIME: <span id="clock">00:00</span></div>
-            <div style="color: var(--text-sub);">STATUS: ONLINE</div>
+            <div style="color: var(--accent);">UPTIME: <span id="clock">00:00</span></div>
+            <div style="color: var(--text-sub);">ENV: PRODUCTION</div>
         </div>
     </nav>
 
     <main>
         <header>
-            <h2 style="margin:0;">Developer Mainframe</h2>
+            <h2 style="margin:0;">Software Engineer Dashboard</h2>
             <div style="display: flex; gap: 10px;">
-                <div class="stat-badge">DB_SYNC: <b>OK</b></div>
-                <div class="stat-badge">VER: <b>4.2.0</b></div>
+                <div class="stat-badge">Language: <b>JavaScript</b></div>
+                <div class="stat-badge">Build: <b>v4.5.0</b></div>
             </div>
         </header>
 
         <div class="dashboard-grid">
             <div class="left-col">
                 <div class="panel">
-                    <div class="panel-header">
-                        <h3>Duck Calibration Unit</h3>
-                        <span style="font-family: monospace;">HITS: <b id="score" style="color: var(--gold);">0</b></span>
+                    <div class="panel-header"><h3>Technical Proficiencies</h3></div>
+                    <div class="skill-item">
+                        <div class="skill-info"><span>Web Development (HTML/CSS/JS)</span><span>95%</span></div>
+                        <div class="skill-bar"><div class="skill-progress" style="width: 95%;"></div></div>
                     </div>
-                    <div id="gameArea">
-                        <div class="duck-target" id="duck" onclick="moveDuck()">🦆</div>
+                    <div class="skill-item">
+                        <div class="skill-info"><span>Software Logic & Algorithims</span><span>80%</span></div>
+                        <div class="skill-bar"><div class="skill-progress" style="width: 80%;"></div></div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-info"><span>UI/UX Interface Design</span><span>85%</span></div>
+                        <div class="skill-bar"><div class="skill-progress" style="width: 85%;"></div></div>
                     </div>
                 </div>
 
                 <div class="panel">
-                    <div class="panel-header"><h3>Log Output</h3></div>
+                    <div class="panel-header"><h3>Interaction Logic Test</h3><span style="font-family: monospace;">HITS: <b id="score" style="color: var(--gold);">0</b></span></div>
+                    <div id="gameArea"><div class="duck-target" id="duck" onclick="moveDuck()">🦆</div></div>
+                </div>
+
+                <div class="panel">
+                    <div class="panel-header"><h3>System Logs</h3></div>
                     <div class="console" id="console">
-                        <div><span class="time">[11:14:00]</span> Dashboard initialized...</div>
-                        <div><span class="time">[11:14:01]</span> Links verified: Scratch, GitHub, Projects.</div>
+                        <div><span style="color:var(--accent)">[OK]</span> Portfolio components initialized.</div>
+                        <div><span style="color:var(--blue-accent)">[INFO]</span> Subdomain mapping complete.</div>
                     </div>
                 </div>
             </div>
 
             <div class="right-col">
                 <div class="panel" style="border-left: 4px solid var(--blue-accent);">
-                    <div class="panel-header"><h3>Companions</h3></div>
-                    <p style="font-size: 0.85rem;"><b>Luna & Ryder</b> monitoring active session.</p>
-                    <button onclick="logMsg('Manual treat deployment successful.')" style="width:100%; padding: 10px; background: var(--blue-accent); border: none; border-radius: 5px; color: white; cursor: pointer; font-weight: bold;">GIVE TREAT</button>
+                    <div class="panel-header"><h3>Companion Metadata</h3></div>
+                    <p style="font-size: 0.8rem;">Active monitoring by units <b>Luna</b> and <b>Ryder</b>.</p>
+                    <button onclick="logMsg('Manual interrupt: Treat deployed.')" style="width:100%; padding: 10px; background: var(--blue-accent); border: none; border-radius: 5px; color: white; cursor: pointer; font-weight: bold; font-size: 0.75rem;">DEPLOY TREAT</button>
                 </div>
 
                 <div class="panel">
-                    <div class="panel-header"><h3>Active Branches</h3></div>
-                    <a href="https://luckyduck883.github.io/Cha0sCraft/" class="project-link"><span>Cha0sCraft</span> <i class="fas fa-external-link-alt"></i></a>
-                    <a href="https://luckyduck883.github.io/BioRoll/" class="project-link"><span>BioRoll</span> <i class="fas fa-external-link-alt"></i></a>
+                    <div class="panel-header"><h3>Project Repository</h3></div>
+                    <p style="font-size: 0.8rem; line-height: 1.4;">This site serves as the primary <b>Software Development Portfolio</b> for LuckyDuck. All nested projects are managed via subdomains.</p>
                 </div>
 
                 <div class="panel">
-                    <div class="panel-header"><h3>Changelog</h3></div>
-                    <div style="font-size: 0.75rem; color: var(--accent); margin-bottom: 2px;">Just Now</div>
-                    <div style="font-size: 0.8rem; color: var(--text-sub); margin-bottom: 12px;">Removed security gateway for instant access.</div>
-                    <div style="font-size: 0.75rem; color: var(--accent); margin-bottom: 2px;">15m ago</div>
-                    <div style="font-size: 0.8rem; color: var(--text-sub);">Integrated Scratch profile link.</div>
+                    <div class="panel-header"><h3>Commits</h3></div>
+                    <div style="font-size: 0.7rem; color: var(--accent);">v4.5.0 - Just Now</div>
+                    <div style="font-size: 0.8rem; color: var(--text-sub); margin-bottom: 10px;">Hardened portfolio content for dev-related requirements.</div>
+                    <div style="font-size: 0.7rem; color: var(--accent);">v4.3.0 - 1h ago</div>
+                    <div style="font-size: 0.8rem; color: var(--text-sub);">UI optimization for dashboard scalability.</div>
                 </div>
             </div>
         </div>
@@ -177,22 +156,18 @@
         function logMsg(msg) {
             const box = document.getElementById('console');
             const time = new Date().toLocaleTimeString([], { hour12: false });
-            box.innerHTML += `<div><span class="time">[${time}]</span> ${msg}</div>`;
+            box.innerHTML += `<div><span style="color:var(--accent)">[${time}]</span> ${msg}</div>`;
             box.scrollTop = box.scrollHeight;
         }
 
         function moveDuck() {
             const duck = document.getElementById('duck');
             const area = document.getElementById('gameArea');
-            const x = Math.random() * (area.clientWidth - 80);
-            const y = Math.random() * (area.clientHeight - 80);
-            duck.style.left = x + 'px';
-            duck.style.top = y + 'px';
-            duck.style.transform = 'none';
-            
+            duck.style.left = (Math.random() * (area.clientWidth - 80)) + 'px';
+            duck.style.top = (Math.random() * (area.clientHeight - 80)) + 'px';
             let s = document.getElementById('score');
             s.innerText = parseInt(s.innerText) + 1;
-            logMsg(`Duck recalibrated at POS: ${Math.floor(x)}, ${Math.floor(y)}`);
+            logMsg(`Duck interaction logic confirmed at hit ${s.innerText}.`);
         }
 
         setInterval(() => {
