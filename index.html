@@ -19,7 +19,7 @@
 
         body, html {
             margin: 0; padding: 0;
-            font-family: 'Inter', 'Segoe UI', sans-serif;
+            font-family: 'Inter', sans-serif;
             background-color: var(--bg-dark);
             color: var(--text-main);
             height: 100vh;
@@ -40,91 +40,92 @@
         .nav-logo { font-weight: bold; color: var(--accent); font-size: 1.4rem; margin-bottom: 30px; display: flex; align-items: center; gap: 10px; }
         .nav-link { 
             color: var(--text-main); text-decoration: none; padding: 12px; border-radius: 8px; margin-bottom: 5px; 
-            transition: 0.2s; display: flex; align-items: center; justify-content: space-between; font-size: 0.9rem; 
+            transition: 0.2s; display: flex; align-items: center; justify-content: space-between; font-size: 0.85rem; 
         }
-        .nav-link:hover, .nav-link.active { background: var(--card-bg); color: var(--accent); }
-        .tag { font-size: 0.6rem; padding: 2px 6px; border-radius: 4px; font-weight: bold; text-transform: uppercase; border: 1px solid; }
+        .nav-link:hover { background: var(--card-bg); color: var(--accent); }
+        .tag { font-size: 0.6rem; padding: 2px 6px; border-radius: 4px; font-weight: bold; border: 1px solid; }
 
         /* Main Content */
-        main { flex-grow: 1; padding: 30px; overflow-y: auto; }
-        header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+        main { flex-grow: 1; padding: 25px; overflow-y: auto; }
+        header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
 
-        .dashboard-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 20px; }
+        .dashboard-grid { display: grid; grid-template-columns: 1.8fr 1.2fr; gap: 20px; }
         .panel { background: var(--sidebar-bg); border: 1px solid var(--border); border-radius: 12px; padding: 20px; margin-bottom: 20px; }
         .panel-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; border-bottom: 1px solid var(--border); padding-bottom: 10px; }
-        .panel-header h3 { margin: 0; font-size: 0.8rem; color: var(--accent); text-transform: uppercase; letter-spacing: 1px; }
+        .panel-header h3 { margin: 0; font-size: 0.75rem; color: var(--accent); text-transform: uppercase; letter-spacing: 1px; }
 
-        /* Technical Skill Bars */
-        .skill-item { margin-bottom: 10px; }
-        .skill-info { display: flex; justify-content: space-between; font-size: 0.8rem; margin-bottom: 4px; }
-        .skill-bar { height: 6px; background: #000; border-radius: 3px; overflow: hidden; }
-        .skill-progress { height: 100%; background: var(--accent); }
+        /* Code Terminal Section */
+        .code-container { background: #050505; border-radius: 8px; padding: 15px; font-family: 'Courier New', monospace; border: 1px solid #111; }
+        .code-line { margin-bottom: 4px; font-size: 0.85rem; }
+        .code-keyword { color: #ff7b72; }
+        .code-func { color: #d2a8ff; }
+        .code-str { color: #a5d6ff; }
+        .code-comment { color: #8b949e; }
 
-        /* Game & Console */
-        #gameArea { height: 220px; position: relative; background: #000; border-radius: 8px; overflow: hidden; border: 1px solid #111; }
-        .duck-target { font-size: 3rem; cursor: pointer; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); user-select: none; }
-        .console { background: #050505; font-family: 'Courier New', monospace; font-size: 0.75rem; padding: 15px; height: 120px; overflow-y: auto; color: #888; border-radius: 8px; }
+        /* Contribution Graph (Mockup) */
+        .grid-graph { display: grid; grid-template-columns: repeat(20, 10px); gap: 3px; }
+        .cube { width: 10px; height: 10px; background: #21262d; border-radius: 2px; }
+        .cube.active { background: #238636; }
+        .cube.high { background: #39d353; }
 
-        .stat-badge { background: var(--card-bg); border: 1px solid var(--border); padding: 5px 12px; border-radius: 20px; font-size: 0.7rem; font-family: monospace; }
+        .btn-action { width: 100%; padding: 10px; background: var(--blue-accent); border: none; border-radius: 6px; color: white; cursor: pointer; font-weight: bold; font-size: 0.75rem; transition: 0.2s; }
+        .btn-action:hover { opacity: 0.8; }
     </style>
 </head>
 <body>
 
     <nav>
         <div class="nav-logo">🦆 LuckyDuck</div>
-        <a href="#" class="nav-link active"><span><i class="fas fa-code"></i> Portfolio</span> <span class="tag" style="color:#55FF55">Live</span></a>
-        <a href="https://scratch.mit.edu/users/DANUGGET21/" target="_blank" class="nav-link"><span><i class="fas fa-cat"></i> Scratch</span></a>
-        <a href="https://github.com/luckyduck883" target="_blank" class="nav-link"><span><i class="fab fa-github"></i> GitHub</span></a>
+        <a href="#" class="nav-link"><span><i class="fas fa-terminal"></i> Core Systems</span></a>
+        <a href="https://scratch.mit.edu/users/DANUGGET21/" target="_blank" class="nav-link"><span><i class="fas fa-cat"></i> Scratch Profile</span></a>
+        <a href="https://github.com/luckyduck883" target="_blank" class="nav-link"><span><i class="fab fa-github"></i> Repository</span></a>
         
         <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--border);">
-            <p style="font-size: 0.7rem; color: var(--text-sub); margin-bottom: 10px;">SUBDOMAIN REPOS</p>
-            <a href="https://luckyduck883.github.io/ImaSayDucks/" class="nav-link"><span>ImaSayDucks</span> <span class="tag" style="color:var(--blue-accent)">v2.1</span></a>
-            <a href="https://luckyduck883.github.io/Cha0sCraft/" class="nav-link"><span>Cha0sCraft</span> <span class="tag" style="color:var(--gold)">DEV</span></a>
+            <p style="font-size: 0.7rem; color: var(--text-sub); margin-bottom: 10px;">SUBDOMAIN DEPLOYMENTS</p>
+            <a href="https://luckyduck883.github.io/ImaSayDucks/" class="nav-link"><span>ImaSayDucks</span> <span class="tag" style="color:var(--accent)">STABLE</span></a>
+            <a href="https://luckyduck883.github.io/Cha0sCraft/" class="nav-link"><span>Cha0sCraft</span> <span class="tag" style="color:var(--gold)">BETA</span></a>
+            <a href="https://luckyduck883.github.io/BioRoll/" class="nav-link"><span>BioRoll</span> <span class="tag" style="color:var(--blue-accent)">BETA</span></a>
         </div>
 
-        <div style="margin-top: auto; font-family: monospace; font-size: 0.7rem;">
-            <div style="color: var(--accent);">UPTIME: <span id="clock">00:00</span></div>
-            <div style="color: var(--text-sub);">ENV: PRODUCTION</div>
+        <div style="margin-top: auto; font-family: monospace; font-size: 0.7rem; color: var(--text-sub);">
+            <div>STATUS: <span style="color: var(--accent);">READY</span></div>
+            <div>VER: 4.6.0</div>
         </div>
     </nav>
 
     <main>
         <header>
-            <h2 style="margin:0;">Software Engineer Dashboard</h2>
-            <div style="display: flex; gap: 10px;">
-                <div class="stat-badge">Language: <b>JavaScript</b></div>
-                <div class="stat-badge">Build: <b>v4.5.0</b></div>
+            <h2 style="margin:0;">Software Engineering Environment</h2>
+            <div class="stat-badge" style="background:var(--card-bg); padding: 5px 15px; border-radius: 20px; border: 1px solid var(--border); font-size: 0.7rem;">
+                ENV: <b style="color:var(--accent)">PROD-MAIN</b>
             </div>
         </header>
 
         <div class="dashboard-grid">
             <div class="left-col">
                 <div class="panel">
-                    <div class="panel-header"><h3>Technical Proficiencies</h3></div>
-                    <div class="skill-item">
-                        <div class="skill-info"><span>Web Development (HTML/CSS/JS)</span><span>95%</span></div>
-                        <div class="skill-bar"><div class="skill-progress" style="width: 95%;"></div></div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-info"><span>Software Logic & Algorithims</span><span>80%</span></div>
-                        <div class="skill-bar"><div class="skill-progress" style="width: 80%;"></div></div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-info"><span>UI/UX Interface Design</span><span>85%</span></div>
-                        <div class="skill-bar"><div class="skill-progress" style="width: 85%;"></div></div>
+                    <div class="panel-header"><h3>Live Code Preview (JavaScript)</h3></div>
+                    <div class="code-container">
+                        <div class="code-line"><span class="code-keyword">const</span> user = <span class="code-str">"LuckyDuck"</span>;</div>
+                        <div class="code-line"><span class="code-keyword">function</span> <span class="code-func">deployTreats</span>() {</div>
+                        <div class="code-line">&nbsp;&nbsp;<span class="code-comment">// Initialize pet monitoring system</span></div>
+                        <div class="code-line">&nbsp;&nbsp;console.<span class="code-func">log</span>(<span class="code-str">"Luna & Ryder: Status Happy"</span>);</div>
+                        <div class="code-line">}</div>
+                        <div class="code-line"><span class="code-func">deployTreats</span>();</div>
                     </div>
                 </div>
 
                 <div class="panel">
-                    <div class="panel-header"><h3>Interaction Logic Test</h3><span style="font-family: monospace;">HITS: <b id="score" style="color: var(--gold);">0</b></span></div>
-                    <div id="gameArea"><div class="duck-target" id="duck" onclick="moveDuck()">🦆</div></div>
-                </div>
-
-                <div class="panel">
-                    <div class="panel-header"><h3>System Logs</h3></div>
-                    <div class="console" id="console">
-                        <div><span style="color:var(--accent)">[OK]</span> Portfolio components initialized.</div>
-                        <div><span style="color:var(--blue-accent)">[INFO]</span> Subdomain mapping complete.</div>
+                    <div class="panel-header"><h3>Deployment Contributions</h3></div>
+                    <div style="display: flex; align-items: flex-end; gap: 15px;">
+                        <div class="grid-graph">
+                            <div class="cube active"></div><div class="cube"></div><div class="cube high"></div><div class="cube active"></div><div class="cube"></div>
+                            <div class="cube active"></div><div class="cube high"></div><div class="cube"></div><div class="cube"></div><div class="cube active"></div>
+                            <div class="cube active"></div><div class="cube"></div><div class="cube active"></div><div class="cube active"></div><div class="cube high"></div>
+                            <div class="cube active"></div><div class="cube active"></div><div class="cube"></div><div class="cube high"></div><div class="cube active"></div>
+                            <div class="cube"></div><div class="cube high"></div><div class="cube active"></div><div class="cube active"></div><div class="cube"></div>
+                        </div>
+                        <div style="font-size: 0.7rem; color: var(--text-sub);">243 Commits this month</div>
                     </div>
                 </div>
             </div>
@@ -132,47 +133,4 @@
             <div class="right-col">
                 <div class="panel" style="border-left: 4px solid var(--blue-accent);">
                     <div class="panel-header"><h3>Companion Metadata</h3></div>
-                    <p style="font-size: 0.8rem;">Active monitoring by units <b>Luna</b> and <b>Ryder</b>.</p>
-                    <button onclick="logMsg('Manual interrupt: Treat deployed.')" style="width:100%; padding: 10px; background: var(--blue-accent); border: none; border-radius: 5px; color: white; cursor: pointer; font-weight: bold; font-size: 0.75rem;">DEPLOY TREAT</button>
-                </div>
-
-                <div class="panel">
-                    <div class="panel-header"><h3>Project Repository</h3></div>
-                    <p style="font-size: 0.8rem; line-height: 1.4;">This site serves as the primary <b>Software Development Portfolio</b> for LuckyDuck. All nested projects are managed via subdomains.</p>
-                </div>
-
-                <div class="panel">
-                    <div class="panel-header"><h3>Commits</h3></div>
-                    <div style="font-size: 0.7rem; color: var(--accent);">v4.5.0 - Just Now</div>
-                    <div style="font-size: 0.8rem; color: var(--text-sub); margin-bottom: 10px;">Hardened portfolio content for dev-related requirements.</div>
-                    <div style="font-size: 0.7rem; color: var(--accent);">v4.3.0 - 1h ago</div>
-                    <div style="font-size: 0.8rem; color: var(--text-sub);">UI optimization for dashboard scalability.</div>
-                </div>
-            </div>
-        </div>
-    </main>
-
-    <script>
-        function logMsg(msg) {
-            const box = document.getElementById('console');
-            const time = new Date().toLocaleTimeString([], { hour12: false });
-            box.innerHTML += `<div><span style="color:var(--accent)">[${time}]</span> ${msg}</div>`;
-            box.scrollTop = box.scrollHeight;
-        }
-
-        function moveDuck() {
-            const duck = document.getElementById('duck');
-            const area = document.getElementById('gameArea');
-            duck.style.left = (Math.random() * (area.clientWidth - 80)) + 'px';
-            duck.style.top = (Math.random() * (area.clientHeight - 80)) + 'px';
-            let s = document.getElementById('score');
-            s.innerText = parseInt(s.innerText) + 1;
-            logMsg(`Duck interaction logic confirmed at hit ${s.innerText}.`);
-        }
-
-        setInterval(() => {
-            document.getElementById('clock').innerText = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-        }, 1000);
-    </script>
-</body>
-</html>
+                    <p style="font-size: 0.8rem; margin-
